@@ -7,12 +7,14 @@ import os
 
 model = lineage_population_model(mode = "cpu")
 
-print(model.predict(image_path = "sample_data/sample.png"))
+print(model.predict(image_path = "sample_data/images/embryo_sample.png"))
 
-os.mkdir("sample_preds")
-results = model.predict_from_video(video_path = "sample_data/sample_videos/20071217_ceh-432x3.mov", save_csv = True, csv_name = "sample_preds/video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10 )
+if os.path.isdir("sample_preds") is not True:
+    os.mkdir("sample_preds")
+
+results = model.predict_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_csv = True, csv_name = "sample_preds/video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10 )
                                     
-plot = model.create_population_plot_from_video(video_path = "sample_data/sample_videos/20071217_ceh-432x3.mov", save_plot= True, plot_name= "sample_preds/plot.png", ignore_last_n_frames= 0 )
+plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "sample_preds/plot.png", ignore_last_n_frames= 0 )
 plot.grid()
 plot.show()
 
@@ -26,9 +28,9 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 
 segmentor = embryo_segmentor()
 
-seg_pred = segmentor.predict(image_path = "sample_data/seg_sample.jpg")
+seg_pred = segmentor.predict(image_path = "sample_data/images/seg_sample.jpg")
 
 plt.imshow(seg_pred)
 plt.show()
 
-segmentor.predict_from_video(video_path = "sample_data/sample_videos/seg_sample.mov")
+segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov")
