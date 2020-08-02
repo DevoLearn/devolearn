@@ -8,25 +8,21 @@ Accelerate data driven research on the C. elegans embryo with deep learning.
 
 * Importing the model
 ```python
-from pyelegans import embryo_segmentor
+from devolearn import embryo_segmentor
 segmentor = embryo_segmentor()
 
 ```
 
-* Running the model on an image
+* Running the model on an image and viewing the prediction
 ```python
-seg_pred = segmentor.predict(image_path = "sample_data/seg_sample.jpg")
-```
-
-* Viewing the result
-```python
+seg_pred = segmentor.predict(image_path = "sample_data/images/seg_sample.jpg")
 plt.imshow(seg_pred)
 plt.show()
 ```
 
 * Running the model on a video and saving the predictions into a folder 
 ```python
-segmentor.predict_from_video(video_path = "sample_data/sample_videos/seg_sample.mov", pred_size = (350,250), save_folder = "preds")
+segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov")
 ```
 
 ## Generating synthetic images of embryos with a Pre-trained GAN
@@ -34,20 +30,17 @@ segmentor.predict_from_video(video_path = "sample_data/sample_videos/seg_sample.
 
 * Importing the model
 ```python
-from pyelegans import Generator, embryo_generator_model
+from devolearn import Generator, embryo_generator_model
 generator = embryo_generator_model()
 
 ```
 
-* Generating a picture
+* Generating a picture and viewing it 
 ```python
 gen_image = generator.generate()  
-
-```
-* Viewing the generated image
-```
 plt.imshow(gen_image)
 plt.show()
+
 ```
 
 * Generating n images and saving them into `foldername` with a user set size 
@@ -65,7 +58,7 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 
 *  Importing the population model for inferences 
 ```python
-from pyelegans import lineage_population_model
+from devolearn import lineage_population_model
 ```
 
 * Loading a model instance to be used to estimate lineage populations of embryos from videos/photos.
@@ -75,16 +68,16 @@ model = lineage_population_model(mode = "cpu")
 
 * Making a prediction from an image
 ```python
-pred = model.predict(image_path = "sample.png")
+print(model.predict(image_path = "sample_data/images/embryo_sample.png"))
 ```
 
 * Making predictions from a video and saving the predictions into a CSV file
 ```python
-results = model.predict_from_video(video_path = "sample_videos/20071217_ceh-432x3.mov", save_csv = True, csv_name = "foo.csv")
+results = model.predict_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_csv = True, csv_name = "video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10 )
 ```
 
 * Plotting the model's predictions
 ```python
-plot = model.create_population_plot_from_video(video_path = "sample_data/sample_videos/20071217_ceh-432x3.mov", save_plot= True, plot_name= "images/plot.png", ignore_last_n_frames= 30 )
+plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0 )
 plot.show()
 ```
