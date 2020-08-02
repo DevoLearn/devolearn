@@ -1,19 +1,46 @@
-# pyelegans 
+# DevoLearn
 
-<img src = "images/py_elegans_vis.png">
+Accelerate data driven research on the C. elegans embryo with deep learning.
 
-> Still under construction
+## Segmenting the C. elegans embryo 
 
-# Generating synthetic images of embryos with a Pre-trained GAN
+<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/3d_segmentation_preds.gif" width = "40%">
+
+* Importing the model
+```python
+from pyelegans import embryo_segmentor
+segmentor = embryo_segmentor()
+
+```
+
+* Running the model on an image
+```python
+seg_pred = segmentor.predict(image_path = "sample_data/seg_sample.jpg")
+```
+
+* Viewing the result
+```python
+plt.imshow(seg_pred)
+plt.show()
+```
+
+* Running the model on a video and saving the predictions into a folder 
+```python
+segmentor.predict_from_video(video_path = "sample_data/sample_videos/seg_sample.mov", pred_size = (350,250), save_folder = "preds")
+```
+
+## Generating synthetic images of embryos with a Pre-trained GAN
+<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/generated_embryos_3.gif" width = "30%">
 
 * Importing the model
 ```python
 from pyelegans import Generator, embryo_generator_model
+generator = embryo_generator_model()
+
 ```
 
 * Generating a picture
 ```python
-generator = embryo_generator_model()
 gen_image = generator.generate()  
 
 ```
@@ -23,8 +50,7 @@ plt.imshow(gen_image)
 plt.show()
 ```
 
-## Bulk generation using the GAN
-* generating n images and saving them into `foldername` with a user set size 
+* Generating n images and saving them into `foldername` with a user set size 
 
 ```python
 generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (700,500))
@@ -32,7 +58,10 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 
 ---
 
-# Predicting populations of cells within the C. elegans embryo
+## Predicting populations of cells within the C. elegans embryo
+
+
+<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "50%">
 
 *  Importing the population model for inferences 
 ```python
@@ -59,6 +88,3 @@ results = model.predict_from_video(video_path = "sample_videos/20071217_ceh-432x
 plot = model.create_population_plot_from_video(video_path = "sample_data/sample_videos/20071217_ceh-432x3.mov", save_plot= True, plot_name= "images/plot.png", ignore_last_n_frames= 30 )
 plot.show()
 ```
-This would show a plot like:
-
-<img src= "sample_preds/plot.png" width = "40%">
