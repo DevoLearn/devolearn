@@ -82,12 +82,12 @@ class embryo_generator_model():
         if self.mode=="cpu":
             self.ngpu = 0
             self.generator= Generator(self.ngpu, self.ngf, self.nz, self.nc)
-            self.generator.load_state_dict(torch.load("models/embryo_generator.pt", map_location= "cpu"))
+            self.generator.load_state_dict(torch.load("devolearn/models/embryo_generator.pt", map_location= "cpu"))
 
         else:
             self.ngpu = 1
             self.generator= Generator(self.ngpu, self.ngf, self.nz, self.nc)
-            self.generator.load_state_dict(torch.load("models/embryo_generator.pt"))
+            self.generator.load_state_dict(torch.load("devolearn/models/embryo_generator.pt"))
 
 
     def generate(self, image_size = (700,500)):

@@ -29,12 +29,12 @@ class lineage_population_model():
         self.model = models.resnet18(pretrained = True)
         self.model.fc = nn.Linear(512, 7)  ## resize last layer
 
-        self.scaler = joblib.load('scaler/scaler.gz')
+        self.scaler = joblib.load('devolearn/scaler/scaler.gz')
 
         if self.mode == "cpu":
-            self.model.load_state_dict(torch.load("models/estimate_lineage_population.pt", map_location= "cpu"))  
+            self.model.load_state_dict(torch.load("devolearn/models/estimate_lineage_population.pt", map_location= "cpu"))  
         else:
-            self.model.load_state_dict(torch.load("models/estimate_lineage_population.pt"))  
+            self.model.load_state_dict(torch.load("devolearn/models/estimate_lineage_population.pt"))  
 
         self.model.eval()
 

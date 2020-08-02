@@ -45,7 +45,7 @@ class embryo_segmentor(nn.Module):
                 in_channels = self.in_channels 
             )
 
-        self.model = torch.load("models/3d_segmentation_model.pth", map_location= "cpu")
+        self.model = torch.load("devolearn/models/3d_segmentation_model.pth", map_location= "cpu")
         self.model.eval()
 
         self.mini_transform = transforms.Compose([
