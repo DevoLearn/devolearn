@@ -1,6 +1,6 @@
-from pyelegans import lineage_population_model
-from pyelegans import Generator, embryo_generator_model
-from pyelegans import embryo_segmentor
+from devolearn import lineage_population_model
+from devolearn import Generator, embryo_generator_model
+from devolearn import embryo_segmentor
 
 import matplotlib.pyplot as plt
 import os 
