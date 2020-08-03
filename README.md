@@ -1,10 +1,11 @@
 <p align="center">
 <img src = "images/banner_0.jpg">
-<img src= "https://img.shields.io/github/issues/DevoLearn/devolearn">
-<img src = "https://img.shields.io/github/contributors/DevoLearn/devolearn">
-<img src = "https://img.shields.io/github/last-commit/DevoLearn/devolearn">
-<img src = "https://img.shields.io/github/stars/DevoLearn/devolearn?style=social">
 </p>
+
+[![](https://img.shields.io/github/issues/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/issues)
+[![](https://img.shields.io/github/contributors/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/graphs/contributors)
+[![](https://img.shields.io/github/last-commit/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/commits/master)
+[![](https://img.shields.io/github/stars/DevoLearn/devolearn?style=social)](https://github.com/DevoLearn/devolearn/stargazers)
 
 ## Segmenting the C. elegans embryo 
 
