@@ -28,9 +28,14 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 
 segmentor = embryo_segmentor()
 
-seg_pred = segmentor.predict(image_path = "sample_data/images/seg_sample.jpg")
+seg_pred = segmentor.predict(image_path = "sample_data/images/seg_sample.jpg", centroid_mode =False )
+seg_pred, centroids = segmentor.predict(image_path = "sample_data/images/seg_sample.jpg", centroid_mode = True)
 
 plt.imshow(seg_pred)
 plt.show()
 
-segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov")
+filenames = segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov", centroid_mode = False, save_folder = "preds")
+
+df = segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov", centroid_mode = True, save_folder = "preds")
+
+df.to_csv("centroids.csv")
