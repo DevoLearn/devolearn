@@ -9,7 +9,7 @@
 
 ## Segmenting the C. elegans embryo 
 
-<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/3d_segmentation_preds.gif" width = "40%">
+<img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/pred_centroids.gif" width = "90%">
 
 * Importing the model
 ```python
@@ -59,7 +59,7 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 ## Predicting populations of cells within the C. elegans embryo
 
 
-<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "50%">
+<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "70%">
 
 *  Importing the population model for inferences 
 ```python
