@@ -6,7 +6,6 @@ import torchvision.transforms as transforms
 from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
 
-
 import os
 import cv2
 import imutils
@@ -21,17 +20,17 @@ import segmentation_models_pytorch as smp
 import warnings
 warnings.filterwarnings("ignore") 
 
-
-
 """
 3d segmentation model for C elegans embryo
 """
 
 def generate_centroid_image(thresh):
+    thresh = cv2.blur(thresh, (5,5))
     thresh = thresh.astype(np.uint8)
     centroid_image = np.zeros(thresh.shape)
     cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     cnts = imutils.grab_contours(cnts)
+    centroids = []
     for c in cnts:
         try:
             # compute the center of the contour
@@ -41,10 +40,11 @@ def generate_centroid_image(thresh):
             # draw the contour and center of the shape on the image
             cv2.drawContours(centroid_image, [c], -1, (255, 255, 255), 2)
             cv2.circle(centroid_image, (cX, cY), 2, (255, 255, 255), -1)
+            centroids.append((cX, cY))
         except:
             pass
 
-    return centroid_image
+    return centroid_image, centroids
 
 class embryo_segmentor(nn.Module):
     def __init__(self):
@@ -82,16 +82,18 @@ class embryo_segmentor(nn.Module):
         if centroid_mode == False:
             return res
         else:
-            centroid_image = generate_centroid_image(res)
-            return centroid_image
+            centroid_image, centroids = generate_centroid_image(res)
+            return centroid_image, centroids
             
-
 
     def predict_from_video(self, video_path, pred_size = (350,250), save_folder = "preds", centroid_mode = False):
         vidObj = cv2.VideoCapture(video_path)   
         success = 1
         images = deque()
         count = 0
+
+        if centroid_mode == True:
+            filenames_centroids = []
 
         while success: 
             success, image = vidObj.read() 
@@ -106,17 +108,21 @@ class embryo_segmentor(nn.Module):
         
         if os.path.isdir(save_folder) == False:
             os.mkdir(save_folder)
-
+       
         for i in tqdm(range(len(images)), desc = "saving predictions: "):
             save_name = save_folder + "/" + str(i) + ".jpg"
             tensor = self.mini_transform(images[i]).unsqueeze(0)
             res = self.model(tensor).detach().cpu().numpy()[0][0]
 
             if centroid_mode == True:
-                res = generate_centroid_image(res)
+                res, centroids = generate_centroid_image(res)
+                filenames_centroids.append([save_name, centroids])
 
             res = cv2.resize(res,pred_size)
             cv2.imwrite(save_name, res*255)
-            
 
-        return os.listdir(save_folder)
+        if centroid_mode == True:
+            df = pd.DataFrame(filenames_centroids, columns = ["filenames", "centroids"])
+            return df
+        else:
+            return os.listdir(save_folder)
