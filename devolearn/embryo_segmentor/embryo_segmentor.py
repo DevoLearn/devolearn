@@ -9,6 +9,7 @@ from torchvision.transforms import ToPILImage
 
 import os
 import cv2
+import imutils
 from tqdm import tqdm
 from PIL import Image
 import numpy as np
@@ -26,6 +27,24 @@ warnings.filterwarnings("ignore")
 3d segmentation model for C elegans embryo
 """
 
+def generate_centroid_image(thresh):
+    thresh = thresh.astype(np.uint8)
+    centroid_image = np.zeros(thresh.shape)
+    cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    cnts = imutils.grab_contours(cnts)
+    for c in cnts:
+        try:
+            # compute the center of the contour
+            M = cv2.moments(c)
+            cX = int(M["m10"] / M["m00"])
+            cY = int(M["m01"] / M["m00"])
+            # draw the contour and center of the shape on the image
+            cv2.drawContours(centroid_image, [c], -1, (255, 255, 255), 2)
+            cv2.circle(centroid_image, (cX, cY), 2, (255, 255, 255), -1)
+        except:
+            pass
+
+    return centroid_image
 
 class embryo_segmentor(nn.Module):
     def __init__(self):
@@ -55,14 +74,20 @@ class embryo_segmentor(nn.Module):
                                     ])
 
 
-    def predict(self, image_path, pred_size = (350,250)):
+    def predict(self, image_path, pred_size = (350,250), centroid_mode = False):
         im = cv2.imread(image_path,0)
         tensor = self.mini_transform(im).unsqueeze(0)
         res = self.model(tensor).detach().cpu().numpy()[0][0]
         res = cv2.resize(res,pred_size)
-        return res
+        if centroid_mode == False:
+            return res
+        else:
+            centroid_image = generate_centroid_image(res)
+            return centroid_image
+            
 
-    def predict_from_video(self, video_path, pred_size = (350,250), save_folder = "preds"):
+
+    def predict_from_video(self, video_path, pred_size = (350,250), save_folder = "preds", centroid_mode = False):
         vidObj = cv2.VideoCapture(video_path)   
         success = 1
         images = deque()
@@ -86,6 +111,10 @@ class embryo_segmentor(nn.Module):
             save_name = save_folder + "/" + str(i) + ".jpg"
             tensor = self.mini_transform(images[i]).unsqueeze(0)
             res = self.model(tensor).detach().cpu().numpy()[0][0]
+
+            if centroid_mode == True:
+                res = generate_centroid_image(res)
+
             res = cv2.resize(res,pred_size)
             cv2.imwrite(save_name, res*255)
             
