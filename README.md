@@ -2,8 +2,8 @@
 <img src = "images/banner_0.jpg">
 <img src= "https://img.shields.io/github/issues/DevoLearn/devolearn">
 <img src = "https://img.shields.io/github/contributors/DevoLearn/devolearn">
- <img src = "https://img.shields.io/github/last-commit/DevoLearn/devolearn">
-  <img src = "https://img.shields.io/github/stars/DevoLearn/devolearn?style=social">
+<img src = "https://img.shields.io/github/last-commit/DevoLearn/devolearn">
+<img src = "https://img.shields.io/github/stars/DevoLearn/devolearn?style=social">
 </p>
 
 ## Segmenting the C. elegans embryo 
