@@ -1,6 +1,6 @@
-# DevoLearn
-
-Accelerate data driven research on the embryogenesis process of different worms with deep learning.
+<p align="center">
+<img src = "images/banner_0.jpg">
+</p>
 
 ## Segmenting the C. elegans embryo 
 
