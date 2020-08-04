@@ -12,7 +12,9 @@
 * [Segmenting the C. elegans embryo](#segmenting-the-c-elegans-embryo)
 * [Generating synthetic images of embryos with a GAN](#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
 * [Predicting populations of cells within the C. elegans embryo](#predicting-populations-of-cells-within-the-c-elegans-embryo)
+* [Contributing to devolearn](https://github.com/DevoLearn/devolearn/blob/master/.github/contributing.md#contributing-to-devolearn)
 * [Contact us](#contact-us)
+
 
 
 ### Segmenting the C. elegans embryo 
