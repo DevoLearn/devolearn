@@ -24,6 +24,14 @@ warnings.filterwarnings("ignore")
 3d segmentation model for C elegans embryo
 """
 
+# Loading the external github package being used as smp
+
+def install(package):
+    subprocess.call(['pip', 'install', package])
+
+package = "segmentation_models_pytorch"
+install(package)
+
 def generate_centroid_image(thresh):
     thresh = cv2.blur(thresh, (5,5))
     thresh = thresh.astype(np.uint8)
