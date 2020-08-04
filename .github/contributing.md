@@ -4,15 +4,13 @@
 
 The following is a set of guidelines for contributing to devolearn and its packages, which are hosted in the [DevoLearn](https://github.com/DevoLearn) organization on GitHub. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
-
 #### Table Of Contents
-
 
 [I don't want to read this whole thing, I just have a question!](#i-dont-want-to-read-this-whole-thing-i-just-have-a-question)
 
 [What should I know before I get started?](#what-should-i-know-before-i-get-started)
   * [What do the devolearn models do ?](#what-do-the-devolearn-models-do-)
-  * [How can I add my own model to devolearn ?](#how-can-I-add-my-own-model-to-devolearn-)
+  * [How can I add my own model to devolearn ?](#how-can-i-add-my-own-model-to-devolearn-)
   * [Making a code contribution](#making-a-code-contribution)
 
 [Suggesting a model](#suggesting-a-model)
@@ -23,7 +21,7 @@ The following is a set of guidelines for contributing to devolearn and its packa
 
 > **Note:** Please don't file an issue to ask a question. You'll get faster results by using the resources below:
 
-* Join the [devolearn slack]() (link to be added soon)
+* Join the [devolearn slack](https://openworm.slack.com/archives/CMVFU7Q4W) 
 * Try contacting the [contributors/authors](https://github.com/DevoLearn/devolearn/graphs/contributors) we're pretty active on github !
 
 ## What should I know before I get started?
@@ -60,11 +58,11 @@ After adding your new model, it might look like (this is just an example on how 
 </pre>
 
 ### Making a code contribution
-For this, keep an eye out on the [issues](https://github.com/DevoLearn/devolearn/issues) page, and if you're a beginner, feel free to contact us on [slack]() (link to be added)
+For this, keep an eye out on the [issues](https://github.com/DevoLearn/devolearn/issues) page, and if you're a beginner, feel free to contact us on [slack](https://openworm.slack.com/archives/CMVFU7Q4W) 
 
 ## Suggesting a model
 
-We're always open to new ideas and suggestions that might help us build new and better models for research. If you have an idea, you're always welcome to talk to us on [slack]() (link to be added). Here are the three four points that we'd like to know the most if it's a model that doesn't exist on devolearn already:
+We're always open to new ideas and suggestions that might help us build new and better models for research. If you have an idea, you're always welcome to talk to us on [slack](https://openworm.slack.com/archives/CMVFU7Q4W). Here are the three four points that we'd like to know the most if it's a model that doesn't exist on devolearn already:
 * Purpose of the model (classification, estimation, Image segmentation, time series prediction, etc)
 * Possible data sources 
 * Input and output formats (e.g input = image of an embryo, output = list of populations of various cells within the embryo)
