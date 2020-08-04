@@ -6,11 +6,13 @@
 [![](https://img.shields.io/github/contributors/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/graphs/contributors)
 [![](https://img.shields.io/github/last-commit/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/commits/master)
 [![](https://img.shields.io/github/stars/DevoLearn/devolearn?style=social)](https://github.com/DevoLearn/devolearn/stargazers)
+[![](https://img.shields.io/twitter/url?color=green&label=Slack&logo=slack&logoColor=blue&style=social&url=https%3A%2F%2Fopenworm.slack.com%2Farchives%2FCMVFU7Q4W)](https://openworm.slack.com/archives/CMVFU7Q4W)
 
 ## Contents
 * [Segmenting the C. elegans embryo](#segmenting-the-c-elegans-embryo)
 * [Generating synthetic images of embryos with a GAN](#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
 * [Predicting populations of cells within the C. elegans embryo](#predicting-populations-of-cells-within-the-c-elegans-embryo)
+* [Contact us](#contact-us)
 
 
 ### Segmenting the C. elegans embryo 
@@ -92,3 +94,10 @@ results = model.predict_from_video(video_path = "sample_data/videos/embryo_timel
 plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0 )
 plot.show()
 ```
+## Contact us
+### Authors/maintainers:
+* [Mayukh](https://twitter.com/mayukh091)
+* [Ujjwal](https://twitter.com/ujjjwalll)
+* [Dr. Bradley Alicea](https://twitter.com/balicea1)
+
+Feel free to join our [slack](https://openworm.slack.com/archives/CMVFU7Q4W)!
