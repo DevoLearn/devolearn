@@ -7,7 +7,13 @@
 [![](https://img.shields.io/github/last-commit/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/commits/master)
 [![](https://img.shields.io/github/stars/DevoLearn/devolearn?style=social)](https://github.com/DevoLearn/devolearn/stargazers)
 
-## Segmenting the C. elegans embryo 
+## Contents
+* [Segmenting the C. elegans embryo](#segmenting-the-c-elegans-embryo)
+* [Generating synthetic images of embryos with a GAN](https://github.com/DevoLearn/devolearn/blob/master/README.md#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
+* [Predicting populations of cells within the C. elegans embryo](https://github.com/DevoLearn/devolearn/blob/master/README.md#predicting-populations-of-cells-within-the-c-elegans-embryo)
+
+
+### Segmenting the C. elegans embryo 
 
 <img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/pred_centroids.gif" width = "90%">
 
@@ -30,7 +36,7 @@ plt.show()
 segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov")
 ```
 
-## Generating synthetic images of embryos with a Pre-trained GAN
+### Generating synthetic images of embryos with a Pre-trained GAN
 <img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/generated_embryos_3.gif" width = "30%">
 
 * Importing the model
@@ -56,7 +62,7 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 
 ---
 
-## Predicting populations of cells within the C. elegans embryo
+### Predicting populations of cells within the C. elegans embryo
 
 
 <img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "70%">
