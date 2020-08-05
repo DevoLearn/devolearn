@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-import torchvision
 import torchvision.transforms as transforms
 from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
@@ -9,6 +8,7 @@ import torchvision.models as models
 
 import os
 import cv2
+import wget
 from PIL import Image
 import joblib
 import numpy as np
@@ -31,10 +31,21 @@ class lineage_population_model():
 
         self.scaler = joblib.load('devolearn/scaler/scaler.gz')
 
-        if self.mode == "cpu":
-            self.model.load_state_dict(torch.load("devolearn/models/estimate_lineage_population.pt", map_location= "cpu"))  
-        else:
-            self.model.load_state_dict(torch.load("devolearn/models/estimate_lineage_population.pt"))  
+        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/models/estimate_lineage_population.pt"
+        self.model_name = "estimate_lineage_population.pt"
+        self.model_dir = "devolearn/models"
+
+        try:
+            print("model already downloaded, loading model...")
+            self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
+        except:
+            print("model not found, downloading from:", self.model_url)
+            if os.path.isdir(self.model_dir) == False:
+                os.mkdir(self.model_dir)
+            filename = wget.download(self.model_url, out= self.model_dir)
+            print(filename)
+            self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
+
 
         self.model.eval()
 

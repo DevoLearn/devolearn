@@ -8,6 +8,7 @@ from torchvision.transforms import ToPILImage
 
 import os
 import cv2
+import wget
 import imutils
 from tqdm import tqdm
 from PIL import Image
@@ -55,6 +56,9 @@ class embryo_segmentor(nn.Module):
         self.ACTIVATION = 'sigmoid'
         self.DEVICE = 'cpu'
         self.in_channels = 1
+        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/models/3d_segmentation_model.pth"
+        self.model_name = "3d_segmentation_model.pth"
+        self.model_dir = "devolearn/models"
 
         self.model = smp.FPN(
                 encoder_name= self.ENCODER, 
@@ -64,7 +68,18 @@ class embryo_segmentor(nn.Module):
                 in_channels = self.in_channels 
             )
 
-        self.model = torch.load("devolearn/models/3d_segmentation_model.pth", map_location= "cpu") 
+        try:
+            print("model already downloaded, loading model...")
+            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu") 
+        except:
+            print("model not found, downloading from:", self.model_url)
+            if os.path.isdir(self.model_dir) == False:
+                os.mkdir(self.model_dir)
+            filename = wget.download(self.model_url, out= self.model_dir)
+            print(filename)
+            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu") 
+
+
         self.model.eval()
 
         self.mini_transform = transforms.Compose([

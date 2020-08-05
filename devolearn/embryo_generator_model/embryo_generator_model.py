@@ -9,6 +9,7 @@ import torchvision.models as models
 
 import os
 import cv2
+import wget
 from tqdm import tqdm
 from PIL import Image
 import joblib
@@ -25,9 +26,8 @@ GAN to generate images of embryos
 """
 
 class Generator(nn.Module):
-    def __init__(self, ngpu, ngf, nz, nc):
+    def __init__(self, ngf, nz, nc):
         super().__init__()
-        self.ngpu = ngpu
         self.main = nn.Sequential(
             # input is Z, going into a convolution
             nn.ConvTranspose2d( nz, ngf * 8, 4, 1, 0, bias=False),
@@ -76,18 +76,26 @@ class embryo_generator_model():
         self.ngf = 128 ## generated image size 
         self.nz = 128
         self.nc = 1
+        self.generator= Generator(self.ngf, self.nz, self.nc)
+        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/models/embryo_generator.pt"
+        self.model_name = "embryo_generator.pt"
+        self.model_dir = "devolearn/models"
+
+        try:
+            print("model already downloaded, loading model...")
+            self.generator.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
+        except:
+            print("model not found, downloading from: ", self.model_url)
+            if os.path.isdir(self.model_dir) == False:
+                os.mkdir(self.model_dir)
+            filename = wget.download(self.model_url, out= self.model_dir)
+            print(filename)
+            self.generator.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
+
+
 
         
-        self.mode = mode
-        if self.mode=="cpu":
-            self.ngpu = 0
-            self.generator= Generator(self.ngpu, self.ngf, self.nz, self.nc)
-            self.generator.load_state_dict(torch.load("devolearn/models/embryo_generator.pt", map_location= "cpu"))
-
-        else:
-            self.ngpu = 1
-            self.generator= Generator(self.ngpu, self.ngf, self.nz, self.nc)
-            self.generator.load_state_dict(torch.load("devolearn/models/embryo_generator.pt"))
+           
 
 
     def generate(self, image_size = (700,500)):
@@ -105,8 +113,6 @@ class embryo_generator_model():
         """
         with torch.no_grad():
             noise = torch.randn([1,128,1,1])
-            if self.mode != "cpu":
-                noise = noise.cuda()
             im = self.generator(noise)[0][0].cpu().detach().numpy()
         im = cv2.resize(im, image_size)
         im = 255 - cv2.convertScaleAbs(im, alpha=(255.0))   ## temporary fix against inverted images 
