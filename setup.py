@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="devolearn",
-    version="0.1.6",
+    version="0.1.7",
     author="Mayukh Deb, Ujjwal Singh, Bradley Alicea", #To be decided, also there can be name of "DevoWorm | OpenWorm Foundation"
     author_email="mayukhmainak2000@gmail.com, ujjwal18113@iiitd.ac.in, balicea@openworm.org", #Subject to change, we can also use Devolearn official Email address.
     description="Accelerate data driven research on embryos with Pre-Trained deep learning models",
