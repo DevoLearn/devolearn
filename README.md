@@ -16,7 +16,10 @@
 * [Contact us](#contact-us)
 
 
-
+### Installation
+```python
+pip install devolearn
+```
 ### Segmenting the C. elegans embryo 
 
 <img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/pred_centroids.gif" width = "90%">
