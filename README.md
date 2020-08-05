@@ -101,8 +101,8 @@ plot.show()
 ```
 ## Contact us
 ### Authors/maintainers:
-* [Mayukh](https://twitter.com/mayukh091)
-* [Ujjwal](https://twitter.com/ujjjwalll)
-* [Dr. Bradley Alicea](https://twitter.com/balicea1)
+* [Mayukh Deb](https://twitter.com/mayukh091)
+* [Ujjwal Singh](https://twitter.com/ujjjwalll)
+* [Dr. Bradly Alicea](https://twitter.com/balicea1)
 
 Feel free to join our [slack](https://openworm.slack.com/archives/CMVFU7Q4W)!
