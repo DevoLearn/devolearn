@@ -58,7 +58,8 @@ class embryo_segmentor(nn.Module):
         self.in_channels = 1
         self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/models/3d_segmentation_model.pth"
         self.model_name = "3d_segmentation_model.pth"
-        self.model_dir = "devolearn/models"
+        self.model_dir = os.path.dirname(__file__)
+        # print("at : ", os.path.dirname(__file__))
 
         self.model = smp.FPN(
                 encoder_name= self.ENCODER, 
@@ -69,7 +70,7 @@ class embryo_segmentor(nn.Module):
             )
 
         try:
-            print("model already downloaded, loading model...")
+            # print("model already downloaded, loading model...")
             self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu") 
         except:
             print("model not found, downloading from:", self.model_url)

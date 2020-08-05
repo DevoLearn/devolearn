@@ -28,20 +28,19 @@ class lineage_population_model():
         self.mode = mode
         self.model = models.resnet18(pretrained = True)
         self.model.fc = nn.Linear(512, 7)  ## resize last layer
-
-        self.scaler = joblib.load('devolearn/scaler/scaler.gz')
+        self.model_dir = os.path.dirname(__file__)
+        self.scaler = joblib.load(self.model_dir + "/" + 'scaler/scaler.gz')
 
         self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/models/estimate_lineage_population.pt"
         self.model_name = "estimate_lineage_population.pt"
-        self.model_dir = "devolearn/models"
+        # print("at : ", os.path.dirname(__file__))
+
 
         try:
-            print("model already downloaded, loading model...")
+            # print("model already downloaded, loading model...")
             self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
         except:
             print("model not found, downloading from:", self.model_url)
-            if os.path.isdir(self.model_dir) == False:
-                os.mkdir(self.model_dir)
             filename = wget.download(self.model_url, out= self.model_dir)
             print(filename)
             self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))

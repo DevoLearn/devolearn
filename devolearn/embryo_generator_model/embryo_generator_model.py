@@ -79,10 +79,11 @@ class embryo_generator_model():
         self.generator= Generator(self.ngf, self.nz, self.nc)
         self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/models/embryo_generator.pt"
         self.model_name = "embryo_generator.pt"
-        self.model_dir = "devolearn/models"
+        self.model_dir = os.path.dirname(__file__)
+        # print("at : ", os.path.dirname(__file__))
 
         try:
-            print("model already downloaded, loading model...")
+            # print("model already downloaded, loading model...")
             self.generator.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
         except:
             print("model not found, downloading from: ", self.model_url)
