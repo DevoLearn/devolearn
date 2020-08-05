@@ -56,7 +56,7 @@ class embryo_segmentor(nn.Module):
         self.ACTIVATION = 'sigmoid'
         self.DEVICE = 'cpu'
         self.in_channels = 1
-        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/models/3d_segmentation_model.pth"
+        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/embryo_segmentor/3d_segmentation_model.pth"
         self.model_name = "3d_segmentation_model.pth"
         self.model_dir = os.path.dirname(__file__)
         # print("at : ", os.path.dirname(__file__))
