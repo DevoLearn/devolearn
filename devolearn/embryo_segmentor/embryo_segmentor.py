@@ -26,6 +26,21 @@ warnings.filterwarnings("ignore")
 """
 
 def generate_centroid_image(thresh):
+
+    """
+    used when centroid_mode == True
+
+    input{
+        thresh <np.array> = 2d numpy array that is returned from the segmentation model
+    }
+    outputs{
+        centroid_image = image containing the contours and their respective centroids 
+        centroids = list of all centroids for the given image as [(x1,y1), (x2,y2)...]
+    }
+
+
+    """
+
     thresh = cv2.blur(thresh, (5,5))
     thresh = thresh.astype(np.uint8)
     centroid_image = np.zeros(thresh.shape)
@@ -50,6 +65,13 @@ def generate_centroid_image(thresh):
 class embryo_segmentor(nn.Module):
     def __init__(self):
         super().__init__()
+
+        """
+        Segments the c. elegans embryo from images/videos, 
+        depends on segmentation-models-pytorch for the model backbone
+
+        """
+
         self.ENCODER = 'resnet18'
         self.ENCODER_WEIGHTS = 'imagenet'
         self.CLASSES = ["nucleus"]
@@ -77,7 +99,7 @@ class embryo_segmentor(nn.Module):
             if os.path.isdir(self.model_dir) == False:
                 os.mkdir(self.model_dir)
             filename = wget.download(self.model_url, out= self.model_dir)
-            print(filename)
+            # print(filename)
             self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu") 
 
 
@@ -91,6 +113,19 @@ class embryo_segmentor(nn.Module):
 
 
     def predict(self, image_path, pred_size = (350,250), centroid_mode = False):
+
+        """
+        inputs{
+            image_path <str> = path to image
+            pred_size <tuple> = (width,height) of the image to be returned, the default size of the model output is (256,256)
+            centroid_mode <bool> = set to true to return both the segmented image and the list of centroids 
+        }
+        outputs{
+            1 channel image as an <np.array> 
+            optional <list> containing centroids 
+        }
+        """
+
         im = cv2.imread(image_path,0)
         tensor = self.mini_transform(im).unsqueeze(0)
         res = self.model(tensor).detach().cpu().numpy()[0][0]

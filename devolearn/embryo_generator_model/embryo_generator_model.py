@@ -90,7 +90,7 @@ class embryo_generator_model():
             if os.path.isdir(self.model_dir) == False:
                 os.mkdir(self.model_dir)
             filename = wget.download(self.model_url, out= self.model_dir)
-            print(filename)
+            # print(filename)
             self.generator.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
 
 

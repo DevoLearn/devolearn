@@ -42,7 +42,7 @@ class lineage_population_model():
         except:
             print("model not found, downloading from:", self.model_url)
             filename = wget.download(self.model_url, out= self.model_dir)
-            print(filename)
+            # print(filename)
             self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
 
 
