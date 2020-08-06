@@ -44,17 +44,16 @@ After adding your new model, it might look like (this is just an example on how 
 .
 ├── embryo_generator_model
 │   ├── embryo_generator_model.py
+|   ├── embryo_generator.pt
 │   ├── __init__.py
 │        
 ├── <b>your_model_name</b>
-│   ├── <b>your_model_name</b>.py
+│   ├── <b>your_model_name</b>.py   ## should contain the model class and all of it's functions 
+|   ├── <b> your_model_name</b>.pt  ## the trained model 
 │   ├── __init__.py 
 |
 ├── __init__.py
-|
-├── models
-│   ├── embryo_generator.pt
-│   └── <b>your_model_name.pt</b>
+
 </pre>
 
 ### Making a code contribution
