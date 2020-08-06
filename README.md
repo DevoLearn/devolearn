@@ -9,11 +9,11 @@
 [![](https://img.shields.io/twitter/url?color=green&label=Slack&logo=slack&logoColor=blue&style=social&url=https%3A%2F%2Fopenworm.slack.com%2Farchives%2FCMVFU7Q4W)](https://openworm.slack.com/archives/CMVFU7Q4W)
 
 ## Contents
-* [Segmenting the C. elegans embryo](#segmenting-the-c-elegans-embryo)
-* [Generating synthetic images of embryos with a GAN](#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
-* [Predicting populations of cells within the C. elegans embryo](#predicting-populations-of-cells-within-the-c-elegans-embryo)
+* [Segmenting the C. elegans embryo](https://github.com/DevoLearn/devolearn#segmenting-the-c-elegans-embryo)
+* [Generating synthetic images of embryos with a GAN](https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
+* [Predicting populations of cells within the C. elegans embryo](https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo)
 * [Contributing to devolearn](https://github.com/DevoLearn/devolearn/blob/master/.github/contributing.md#contributing-to-devolearn)
-* [Contact us](#contact-us)
+* [Contact us](https://github.com/DevoLearn/devolearn#contact-us)
 
 
 ### Installation
@@ -40,7 +40,21 @@ plt.show()
 
 * Running the model on a video and saving the predictions into a folder 
 ```python
-segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov")
+filenames = segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov", centroid_mode = False, save_folder = "preds")
+```
+
+* Finding the centroids of the segmented features
+```python
+seg_pred, centroids = segmentor.predict(image_path = "sample_data/images/seg_sample.jpg", centroid_mode = True)
+plt.imshow(seg_pred)
+plt.show()
+```
+
+* Saving the centroids from each frame into a CSV
+
+```python
+df = segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov", centroid_mode = True, save_folder = "preds")
+df.to_csv("centroids.csv")
 ```
 
 ### Generating synthetic images of embryos with a Pre-trained GAN
@@ -61,7 +75,7 @@ plt.show()
 
 ```
 
-* Generating n images and saving them into `foldername` with a user set size 
+* Generating n images and saving them into `foldername` with a custom size
 
 ```python
 generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (700,500))
@@ -94,7 +108,7 @@ print(model.predict(image_path = "sample_data/images/embryo_sample.png"))
 results = model.predict_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_csv = True, csv_name = "video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10 )
 ```
 
-* Plotting the model's predictions
+* Plotting the model's predictions from a video
 ```python
 plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0 )
 plot.show()
