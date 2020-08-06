@@ -57,7 +57,11 @@ After adding your new model, it might look like (this is just an example on how 
 </pre>
 
 ### Making a code contribution
-For this, keep an eye out on the [issues](https://github.com/DevoLearn/devolearn/issues) page, and if you're a beginner, feel free to contact us on [slack](https://openworm.slack.com/archives/CMVFU7Q4W) 
+For this, keep an eye out on the [issues](https://github.com/DevoLearn/devolearn/issues) page, and if you're a beginner, feel free to contact us on [slack](https://openworm.slack.com/archives/CMVFU7Q4W). 
+
+Here's a flowchart to give you a better idea on how devolearn works:
+
+<img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/project_structure.jpg">
 
 ## Suggesting a model
 
