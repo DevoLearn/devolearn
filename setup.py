@@ -40,6 +40,7 @@ setuptools.setup(
         "pyparsing>=2.4.7",
         "python-dateutil>=2.8.1",
         "six>=1.15.0",
+        "wget"
       ],
     python_requires='>=3.6',   
     include_package_data=True   
