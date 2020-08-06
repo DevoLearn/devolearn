@@ -1,5 +1,5 @@
 <p align="center">
-<img src = "https://github.com/DevoLearn/devolearn/blob/master/images/banner_1.jpg">
+<img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/banner_1.jpg">
 </p>
 
 [![](https://img.shields.io/github/issues/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/issues)
