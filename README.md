@@ -13,7 +13,7 @@
 * [Segmenting the C. elegans embryo](https://github.com/DevoLearn/devolearn#segmenting-the-c-elegans-embryo)
 * [Generating synthetic images of embryos with a GAN](https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
 * [Predicting populations of cells within the C. elegans embryo](https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo)
-* [Contributing to devolearn](https://github.com/DevoLearn/devolearn/blob/master/.github/contributing.md#contributing-to-devolearn)
+* [Contributing to DevoLearn](https://github.com/DevoLearn/devolearn/blob/master/.github/contributing.md#contributing-to-devolearn)
 * [Contact us](https://github.com/DevoLearn/devolearn#contact-us)
 
 
@@ -120,4 +120,4 @@ plot.show()
 * [Ujjwal Singh](https://twitter.com/ujjjwalll)
 * [Dr. Bradly Alicea](https://twitter.com/balicea1)
 
-Feel free to join our [slack](https://openworm.slack.com/archives/CMVFU7Q4W)!
+Feel free to join our [Slack workspace](https://openworm.slack.com/archives/CMVFU7Q4W)!
