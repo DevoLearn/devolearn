@@ -10,6 +10,8 @@
 
 
 ## Contents
+
+* [Example notebooks](https://github.com/DevoLearn/devolearn#example-notebooks)
 * [Segmenting the C. elegans embryo](https://github.com/DevoLearn/devolearn#segmenting-the-c-elegans-embryo)
 * [Generating synthetic images of embryos with a GAN](https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
 * [Predicting populations of cells within the C. elegans embryo](https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo)
@@ -21,6 +23,12 @@
 ```python
 pip install devolearn
 ```
+### Example notebooks
+
+<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/nodes_matrix_long_smooth.gif" width = "50%">
+
+* [Extracting centroid maps and making 3d centroid models](https://nbviewer.jupyter.org/github/DevoLearn/data-science-demos/blob/master/Networks/experiments_with_devolearn_node_maps.ipynb)
+
 ### Segmenting the C. elegans embryo 
 
 <img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/pred_centroids.gif" width = "90%">
