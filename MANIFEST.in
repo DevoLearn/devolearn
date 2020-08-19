@@ -1,1 +1,5 @@
 include devolearn/lineage_population_model/scaler/scaler.gz
+include devolearn/tests/sample_data/images/embryo_sample.png
+include devolearn/tests/sample_data/images/seg_sample.jpg
+include devolearn/tests/sample_data/videos/embryo_timelapse.mov
+include devolearn/tests/sample_data/videos/seg_sample.mov
