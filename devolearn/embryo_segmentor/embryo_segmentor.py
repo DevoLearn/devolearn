@@ -62,10 +62,9 @@ def generate_centroid_image(thresh):
 
     return centroid_image, centroids
 
-class embryo_segmentor(nn.Module):
+class embryo_segmentor():
     def __init__(self):
-        super().__init__()
-
+        
         """
         Segments the c. elegans embryo from images/videos, 
         depends on segmentation-models-pytorch for the model backbone
