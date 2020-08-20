@@ -2,6 +2,7 @@
 <img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/banner_1.jpg">
 </p>
 
+[![Build Status](https://travis-ci.org/DevoLearn/devolearn.svg?branch=master)](https://travis-ci.org/DevoLearn/devolearn)
 [![](https://img.shields.io/github/issues/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/issues)
 [![](https://img.shields.io/github/contributors/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/graphs/contributors)
 [![](https://img.shields.io/github/last-commit/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/commits/master)
