@@ -78,7 +78,7 @@ generator = embryo_generator_model()
 
 ```
 
-* Generating a picture and viewing it 
+* Generating a picture and viewing it with [matplotlib](https://matplotlib.org/)
 ```python
 gen_image = generator.generate()  
 plt.imshow(gen_image)
