@@ -17,7 +17,7 @@ install:
   - pip install coveralls
 # # command to run tests, e.g. python setup.py test
 script:  
-  - python setup.py test --with-coverage --cover-package pypiview
+  - python setup.py test 
  
 after_sucess:
-  coveralls
+  - echo "test success" 
