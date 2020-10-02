@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.2.0",
     author="Mayukh Deb, Ujjwal Singh, Bradly Alicea", 
     author_email="mayukhmainak2000@gmail.com, ujjwal18113@iiitd.ac.in, balicea@openworm.org", #Subject to change, we can also use Devolearn official Email address.
-    description="Accelerate data driven research on embryos with deep learning models",
+    description="Accelerate data driven research in developmental biology with deep learning models",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/DevoLearn/devolearn",
