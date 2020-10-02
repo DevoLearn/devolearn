@@ -96,7 +96,7 @@ class embryo_generator_model():
 
 
         
-           
+    
 
 
     def generate(self, image_size = (700,500)):
