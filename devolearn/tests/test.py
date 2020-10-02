@@ -12,11 +12,6 @@ from devolearn import lineage_population_model
 from devolearn import Generator, embryo_generator_model
 from devolearn import embryo_segmentor
 
-import os
-
-
-
-
 class test(unittest.TestCase):
 
     def test_lineage_population_model(self):
