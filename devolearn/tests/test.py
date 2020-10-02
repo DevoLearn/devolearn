@@ -15,8 +15,6 @@ from devolearn import embryo_segmentor
 import os
 
 
-
-
 class test(unittest.TestCase):
 
     def test_lineage_population_model(self):
