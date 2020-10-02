@@ -58,6 +58,9 @@ class lineage_population_model():
     def predict(self, image_path):
 
         """
+        reference{
+            https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo
+        } 
         input{
             image path <str>
         }
