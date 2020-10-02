@@ -126,6 +126,9 @@ class embryo_generator_model():
 
     def generate_n_images(self, n = 3, foldername = "generated_images", image_size = (700,500)):
         """
+        reference{
+            https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan
+        }
         inputs{
             n <int> = number of images to generate
             foldername <str> = name of the folder where the images whould be saved. 
