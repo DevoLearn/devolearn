@@ -102,6 +102,9 @@ class embryo_generator_model():
     def generate(self, image_size = (700,500)):
 
         """
+        reference{
+            https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan
+        }
         inputs{
             image_size <tuple> = (width,height of the generated image)
         }
