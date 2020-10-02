@@ -106,7 +106,7 @@ class lineage_population_model():
             ignore_last_n_frames <int> = number of frames to drop in the end of the video 
         }
 
- 
+
         output{
             DataFrame containing all the preds with the corresponding column name <pandas.DataFrame>
         }
