@@ -37,7 +37,7 @@ def generate_centroid_image(thresh):
         centroid_image = image containing the contours and their respective centroids 
         centroids = list of all centroids for the given image as [(x1,y1), (x2,y2)...]
     }
-
+ 
 
     """
 
