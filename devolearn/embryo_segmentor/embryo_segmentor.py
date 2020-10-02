@@ -114,6 +114,9 @@ class embryo_segmentor():
     def predict(self, image_path, pred_size = (350,250), centroid_mode = False):
 
         """
+        reference{
+            https://github.com/DevoLearn/devolearn#segmenting-the-c-elegans-embryo
+        } 
         inputs{
             image_path <str> = path to image
             pred_size <tuple> = (width,height) of the image to be returned, the default size of the model output is (256,256)
