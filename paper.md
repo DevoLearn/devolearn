@@ -1,27 +1,25 @@
 
 ---  
 title: 'Pre-trained Deep-Learning Models That Enable Computational Developmental Biology Research and Education'  
-tags:  
+tags:    
   - Python  
 authors:  
-  - name: Mayukh Deb  
-    orcid: ---  
+  - name: Mayukh Deb   
     affiliation: 1,2 
   - name: Ujjwal Singh  
-    orcid: ---  
     affiliation: 1 ,3
   - name: Bradly Alicea  
     orcid: 0000-0003-3869-3175  
     affiliation: 1 ,4
 affiliations:  
  - name: OpenWorm Foundation  
-   index: --  
+   index: 1  
  - name: Amrita Vishwa Vidyapeetham University 
-   index: -- 
+   index: 2 
  - name: IIIT Delhi  
-   index: -- 
+   index: 3 
   - name: Orthogonal Research and Education Lab
-   index: --  
+   index: 4  
  date: December 2, 2020  
 bibliography: paper.bib  
 ---  
