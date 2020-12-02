@@ -12,15 +12,15 @@ authors:
     orcid: 0000-0003-3869-3175  
     affiliation: 1 ,4
 affiliations:  
- - name: OpenWorm Foundation  
+ - name: OpenWorm Foundation    
    index: 1  
- - name: Amrita Vishwa Vidyapeetham University 
+ - name: Amrita Vishwa Vidyapeetham University  
    index: 2 
- - name: IIIT Delhi  
+ - name: IIIT Delhi    
    index: 3 
-  - name: Orthogonal Research and Education Lab
+  - name: Orthogonal Research and Education Lab  
    index: 4  
- date: December 2, 2020  
+date: December 2, 2020  
 bibliography: paper.bib  
 ---  
 
@@ -39,8 +39,9 @@ DevoLearn has been made available as an open-source module, available on PyPi ([
 DevoLearn 0.2.0 is optimized to segment and analyze high-resolution microscopy images such as those acquired using light sheet microscopy. Additionally, the possibility of time-series prediction allows us to capture features related to cellular- and organism-level movement. DevoLearn 0.2.0 uses a ResNet18 architecture to build a pre-trained model of the shape features structure inherent in a microscopy image. Data from the WormImage database [@Hall and Altun:2008] is used to train the model for _C. elegans_ embryogenesis. The EPIC data set [@Murray:2012] is used to extract metadata needed to construct labels for individual cells and validate the input data. 
 
 ## Statement of Need
-Devolearn (0.2.0) is a python package that aims to automate the process of collecting metadata from videos/images of the _C. elegans_ embryo with the help of deep learning models (Figure 1). This would enable researchers/enthusiasts to analyse features from videos/images at scale without having to annotate their data manually. There are a number of pre-trained models which are already in use in different contexts, but options are fewer within the unique feature space of developmental biology, in particular. Devolearn aims not just to fix this issue, but also work on other aspects around developmental biology with species-specific models.  
+Devolearn (0.2.0) is a python package that aims to automate the process of collecting metadata from videos/images of the _C. elegans_ embryo with the help of deep learning models \autoref{fig:1}. This would enable researchers/enthusiasts to analyse features from videos/images at scale without having to annotate their data manually. There are a number of pre-trained models which are already in use in different contexts, but options are fewer within the unique feature space of developmental biology, in particular. Devolearn aims not just to fix this issue, but also work on other aspects around developmental biology with species-specific models.  
 
+![Schematic demonstrating the runtime procedure of the DevoLearn standalone program.{fig:1}](https://github.com/DevoLearn/Education/blob/master/DevoLearn%20Schematic.png)
 <P>
 <CENTER>
   <IMG SRC="https://github.com/DevoLearn/Education/blob/master/DevoLearn%20Schematic.png">
@@ -51,7 +52,9 @@ Devolearn (0.2.0) is a python package that aims to automate the process of colle
   
 DevoLearn is also capable of extracting _meta-features_ that identify movement patterns and multicellular physics in the embryogenetic environment. Exampoles of this include embryo networks [@Alicea and Gordon:2018] and motion features. The former capability involves extracting potential structural and functional networks using distance metrics and other information extracted from microscopy images. Motion features can also be extracted and can be used for a variety of purposes, including as a means to build generative adversarial network (GAN) models [@Goodfellow:2014].
 
-Devolearn has been built to be very data science friendly and to be highly compatible with libraries like NumPy [@Harris:2020] and Pandas [@Virtanen:2020]. As the Devolearn framework (Figure 2) grows bigger with more tools and deep learning models, the combination of beginner friendliness and support for data science functionality will enable exciting scientific explorations both in developmental biology and data science.   
+Devolearn has been built to be very data science friendly and to be highly compatible with libraries like NumPy [@Harris:2020] and Pandas [@Virtanen:2020]. As the Devolearn framework \autoref{fig:2} grows bigger with more tools and deep learning models, the combination of beginner friendliness and support for data science functionality will enable exciting scientific explorations both in developmental biology and data science.   
+
+![Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework.{fig:2}](https://github.com/DevoLearn/Education/blob/master/DevoLearn%20Umbrella.png)
 <P>
 <CENTER>
   <IMG SRC="https://github.com/DevoLearn/Education/blob/master/DevoLearn%20Umbrella.png">
