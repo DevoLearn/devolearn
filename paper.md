@@ -1,5 +1,4 @@
-
----  
+--  
 title: 'Pre-trained Deep-Learning Models That Enable Computational Developmental Biology Research and Education'  
 tags:    
 - Python
