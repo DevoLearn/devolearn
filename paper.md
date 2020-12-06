@@ -59,5 +59,6 @@ Devolearn has been built to be very data science friendly and to be highly compa
 The DevoLearn pre-trained models is also a part of the [DevoLearn Github organization](https://github.com/devolearn), which serves as a comprehensive open-source research and educational resource. DevoLearn not only features the DevoLearn pre-trained models, but also provides users with Data Science tutorials, web-based applications that offer other Deep Learning and Machine Learning tools for cell segmentation, and other educational resources.  We invite new collaborators to join us on a continual basis in maintaining and expanding the capabilities of the DevoLearn organization.  
 
 # Acknowledgements
-We would like to thank the OpenWorm Foundation, the International Neuroinformatics Coordinating Facility (INCF), and Google Summer of Code for their financial and institutional support. Gratitude also goes to the DevoWorm group for their expertise and feedback.  
+We would like to thank the OpenWorm Foundation, the International Neuroinformatics Coordinating Facility (INCF), and Google Summer of Code for their financial and institutional support. Gratitude also goes to the DevoWorm group for their expertise and feedback. 
+
 # References
