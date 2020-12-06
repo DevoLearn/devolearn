@@ -60,3 +60,4 @@ The DevoLearn pre-trained models is also a part of the [DevoLearn Github organiz
 
 # Acknowledgements
 We would like to thank the OpenWorm Foundation, the International Neuroinformatics Coordinating Facility (INCF), and Google Summer of Code for their financial and institutional support. Gratitude also goes to the DevoWorm group for their expertise and feedback.  
+# References
