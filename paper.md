@@ -2,26 +2,34 @@
 ---  
 title: 'Pre-trained Deep-Learning Models That Enable Computational Developmental Biology Research and Education'  
 tags:    
-  - Python  
+- Python
+- pre-trained Models
+- deep learning
+- cell segmentation
+date: "December 6, 2020"  
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
 authors:  
-  - name: Mayukh Deb   
-    affiliation: 1,2 
-  - name: Ujjwal Singh  
-    affiliation: 1 ,3
-  - name: Bradly Alicea  
-    orcid: 0000-0003-3869-3175  
-    affiliation: 1 ,4
-affiliations:  
- - name: OpenWorm Foundation    
-   index: 1  
- - name: Amrita Vishwa Vidyapeetham University  
-   index: 2 
- - name: IIIT Delhi    
-   index: 3 
-  - name: Orthogonal Research and Education Lab  
-   index: 4  
-date: December 2, 2020  
+- name: Mayukh Deb   
+  affiliation: 1, 2 
+- name: Ujjwal Singh  
+  affiliation: 1, 3
+- name: Bradly Alicea  
+  orcid: 0000-0003-3869-3175  
+  affiliation: 1, 4
 bibliography: paper.bib  
+affiliations:  
+- name: OpenWorm Foundation    
+   index: 1  
+- name: Amrita Vishwa Vidyapeetham University  
+   index: 2 
+- name: IIIT Delhi    
+   index: 3 
+- name: Orthogonal Research and Education Lab  
+   index: 4  
 ---  
 
 # Summary
