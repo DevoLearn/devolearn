@@ -40,7 +40,7 @@ Extracting metadata from microscopic videos/images have been one of the key step
 
 * **Generating images of the _C. elegans_ embryo with a Generative Adversarial Network (GAN) (beta)** and provides support for extracting so-called _meta-features_. The current version of DevoLearn (0.2.0) also supports bulk generation of images.  
 
-DevoLearn has been made available as an open-source module, available on PyPi ([link](https://pypi.org/project/devolearn/)). All the deep-learning models used in devolearn are built and trained on PyTorch, the PyPI package (https://pypi.org/project/devolearn/) itself does not contain the model files, but the models are downloaded automatically once the user imports the model class from the package. 
+DevoLearn has been made available as an open-source module, available on PyPi ([https://pypi.org/project/devolearn/](https://pypi.org/project/devolearn/)). All the deep-learning models used in devolearn are built and trained on PyTorch. The PyPI package itself does not contain the model files, but the models are downloaded automatically once the user imports the model class from the package. 
 
 ## Technical Details  
 DevoLearn 0.2.0 is optimized to segment and analyze high-resolution microscopy images such as those acquired using light sheet microscopy. Additionally, the possibility of time-series prediction allows us to capture features related to cellular- and organism-level movement. DevoLearn 0.2.0 uses a ResNet18 architecture to build a pre-trained model of the shape features structure inherent in a microscopy image. Data from the WormImage database (Hall and Altun, 2008) is used to train the model for _C. elegans_ embryogenesis. The EPIC data set (Murray, 2012) is used to extract metadata needed to construct individual cells labels used to validate input data. 
@@ -62,7 +62,7 @@ The DevoLearn pre-trained models is also a part of the [DevoLearn Github organiz
 We would like to thank the OpenWorm Foundation, the International Neuroinformatics Coordinating Facility (INCF), and Google Summer of Code for their financial and institutional support. Gratitude also goes to the DevoWorm group for their expertise and feedback. 
 
 # References
-Alicea, B. et.al (2019). Pre-trained Machine Learning Models for Developmental Biology. The Node blog, October 29. [https://thenode.biologists.com/pre-trained-machine-learning-models-for-developmental-biology/uncategorized/](https://thenode.biologists.com/pre-trained-machine-learning-models-for-developmental-biology/uncategorized/)
+Alicea, B. et.al (2019). Pre-trained Machine Learning Models for Developmental Biology. The Node blog, October 29. https://thenode.biologists.com/pre-trained-machine-learning-models-for-developmental-biology/uncategorized/
 
 Alicea, B. and Gordon R. (2018). Cell Differentiation Processes as Spatial Networks: identifying four-dimensional structure in embryogenesis. _BioSystems, 173_, 235-246.
 
