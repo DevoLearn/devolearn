@@ -62,7 +62,7 @@ The DevoLearn pre-trained models is also a part of the DevoLearn Github organiza
 We would like to thank the OpenWorm Foundation, the International Neuroinformatics Coordinating Facility (INCF), and Google Summer of Code for their financial and institutional support. Gratitude also goes to the DevoWorm group for their expertise and feedback. 
 
 # References
-Alicea, B. et.al (2019). Pre-trained Machine Learning Models for Developmental Biology. _The Node blog_, October 29. https://doi.org/10.6084/m9.figshare.13347095
+Alicea, B., Gordon, R., Kohrmann, A., Parent, J., and Varma, V. (2019). Pre-trained Machine Learning Models for Developmental Biology. _The Node blog_, October 29. doi:10.6084/m9.figshare.13347095.
 
 Alicea, B. and Gordon R. (2018). Cell Differentiation Processes as Spatial Networks: identifying four-dimensional structure in embryogenesis. _BioSystems, 173_, 235-246.  
 
