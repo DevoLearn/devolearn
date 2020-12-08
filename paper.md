@@ -62,9 +62,9 @@ The DevoLearn pre-trained models is also a part of the DevoLearn Github organiza
 We would like to thank the OpenWorm Foundation, the International Neuroinformatics Coordinating Facility (INCF), and Google Summer of Code for their financial and institutional support. Gratitude also goes to the DevoWorm group for their expertise and feedback. 
 
 # References
-Alicea, B. et.al (2019). Pre-trained Machine Learning Models for Developmental Biology. The Node blog, October 29. https://thenode.biologists.com/pre-trained-machine-learning-models-for-developmental-biology/uncategorized/
+Alicea, B. et.al (2019). Pre-trained Machine Learning Models for Developmental Biology. _The Node blog_, October 29. https://thenode.biologists.com/
 
-Alicea, B. and Gordon R. (2018). Cell Differentiation Processes as Spatial Networks: identifying four-dimensional structure in embryogenesis. _BioSystems, 173_, 235-246.
+Alicea, B. and Gordon R. (2018). Cell Differentiation Processes as Spatial Networks: identifying four-dimensional structure in embryogenesis. _BioSystems, 173_, 235-246.  
 
 Cao, J., Guan, G., Wong, M-K., Chan, L-Y., Tang, C., Zhao, Z., and Yan, H. (2019a). Establishment of morphological atlas of _Caenorhabditis elegans_ embryo with cellular resolution using deep-learning-based 4D segmentation. _bioRxiv_, doi:10.1101/797688.
 
