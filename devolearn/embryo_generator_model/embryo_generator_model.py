@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 
 
 
+
 """
 GAN to generate images of embryos 
 """
@@ -42,19 +43,21 @@ class Generator(nn.Module):
             nn.BatchNorm2d(ngf * 2),
             nn.ReLU(True),
             # state size. (ngf*2) x 16 x 16
-            nn.ConvTranspose2d( ngf * 2, ngf, 4, 2, 1, bias=False),
-            nn.BatchNorm2d(ngf),
+            nn.ConvTranspose2d( ngf * 2, ngf*2, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(ngf*2),
             nn.ReLU(True),
-            # state size. (ngf) x 32 x 32
-
-            nn.ConvTranspose2d( ngf, ngf, 4, 2, 1, bias=False),  ## added custom stuff here
+            # state size. (ngf*2) x 32 x 32
+            nn.ConvTranspose2d( ngf*2, ngf, 4, 2, 1, bias=False),  ## added custom stuff here
             nn.BatchNorm2d(ngf),
             nn.ReLU(True),
             # state size. (ngf) x 64 x 64
-
-            nn.ConvTranspose2d( ngf, nc, 4, 2, 1, bias=False),
+            nn.ConvTranspose2d( ngf, 10, 4, 2, 1, bias=False),  ## added custom stuff here
+            nn.BatchNorm2d(10),
+            nn.ReLU(True),
+            # state size. 10 x 128 x 128
+            nn.ConvTranspose2d( 10, nc, 4, 2, 1, bias=False),
             nn.Tanh()
-            # state size. (nc) x 128 x 128
+            # state size. (nc) x 256 x 256
         )
 
     def forward(self, input):
@@ -68,7 +71,6 @@ class embryo_generator_model():
         ngf = size of output image of the GAN 
         nz = size of latent space noise (latent vector)
         nc = number of color channels of the output image
-
         Do not tweak these unless you're changing the Generator() with a new model with a different architecture. 
     
         """
@@ -77,10 +79,11 @@ class embryo_generator_model():
         self.nz = 128
         self.nc = 1
         self.generator= Generator(self.ngf, self.nz, self.nc)
-        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/embryo_generator_model/embryo_generator.pt"
-        self.model_name = "embryo_generator.pt"
+        self.model_url = "https://raw.githubusercontent.com/Mainakdeb/devolearn/master/devolearn/embryo_generator_model/embryo_generator.pth"
+        self.model_name = "embryo_generator.pth"
         self.model_dir = os.path.dirname(__file__)
         # print("at : ", os.path.dirname(__file__))
+        print("Searching here.. ",self.model_dir + "/" + self.model_name)
 
         try:
             # print("model already downloaded, loading model...")
@@ -113,7 +116,6 @@ class embryo_generator_model():
         }
         The native size of the GAN's output is 128*128, and then it resizes the 
         generated image to the desired size. 
-
         """
         with torch.no_grad():
             noise = torch.randn([1,128,1,1])
@@ -139,7 +141,6 @@ class embryo_generator_model():
         }
         
         This is an extension of the generator.generate() function for generating multiple images at once and saving them into a folder. 
-
         """
 
         if os.path.isdir(foldername) == False:
@@ -148,7 +149,7 @@ class embryo_generator_model():
         
         for i in tqdm(range(n), desc = "generating images :"):
             filename = foldername + "/" + str(i) + ".jpg"
-            gen_image = self.generate()  ## 2d numpy array 
+            gen_image = self.generate()  ## 2d numpy arreay 
             cv2.imwrite(filename, gen_image)
 
         print ("Saved ", n, " images in", foldername)
