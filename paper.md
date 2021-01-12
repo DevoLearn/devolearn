@@ -1,4 +1,4 @@
-# Pre-trained Models That Enable Computational Developmental Biology
+# DevoLearn: Machine Learning Models and Education that Enable Computational Developmental Biology
 Mayukh Deb <SUP>1, 2</SUP>, Ujjwal Singh <SUP>1, 3</SUP>, Bradly Alicea <SUP>1, 4</SUP><BR>
 
 ## Abstract
