@@ -79,7 +79,7 @@ class embryo_generator_model():
         self.nz = 128
         self.nc = 1
         self.generator= Generator(self.ngf, self.nz, self.nc)
-        self.model_url = "https://raw.githubusercontent.com/Mainakdeb/devolearn/master/devolearn/embryo_generator_model/embryo_generator.pth"
+        self.model_url = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/devolearn/embryo_generator_model/embryo_generator.pth"
         self.model_name = "embryo_generator.pth"
         self.model_dir = os.path.dirname(__file__)
         # print("at : ", os.path.dirname(__file__))
