@@ -1,37 +1,14 @@
---  
-title: 'Pre-trained Models That Enable Computational Developmental Biology'  
-tags:    
-- Python
-- pre-trained Models
-- deep learning
-- cell segmentation
-date: "December 6, 2020"  
-output:
-  pdf_document: default
-  html_document:
-    df_print: paged
-  word_document: default
-authors:  
-- name: Mayukh Deb   
-  affiliation: 1, 2 
-- name: Ujjwal Singh  
-  affiliation: 1, 3
-- name: Bradly Alicea  
-  orcid: 0000-0003-3869-3175  
-  affiliation: 1, 4
-bibliography: paper.bib  
-affiliations:  
-- name: OpenWorm Foundation    
-   index: 1  
-- name: Amrita Vishwa Vidyapeetham University  
-   index: 2 
-- name: IIIT Delhi    
-   index: 3 
-- name: Orthogonal Research and Education Lab  
-   index: 4  
----  
+# Pre-trained Models That Enable Computational Developmental Biology
+Mayukh Deb <SUP>1, 2</SUP>, Ujjwal Singh <SUP>1, 3</SUP>, Bradly Alicea <SUP>1, 4</SUP><BR>
+  <SUP>1</SUP>OpenWorm Foundation    
+  <SUP>2</SUP>Amrita Vishwa Vidyapeetham University  
+  <SUP>3</SUP>IIIT Delhi    
+  <SUP>4</SUP>Orthogonal Research and Education Lab
 
-# Summary
+## Abstract
+TBA 
+
+## Summary
 Extracting metadata from microscopic videos/images have been one of the key steps in the process of finding emerging patterns from various biological processes. There have been many attempts to develop segmentation tools for cell shape and location (Cao, 2019a; Cao, 2019b; Chen, 2013). In particular, cell tracking methodologies provide quantitative summaries of cell centroid positions within an embryo (Ulman, 2006). Our pre-trained models (Devolearn) aim to speed up this process of collecting metadata by using robust deep learning models that can be used through a high level API. Devolearn’s primary focus is the _Caenorhabditis elegans_ embryo and specifically on the early embryogenesis process. This builds upon desired functionality that was first proposed by the DevoWorm group in (Alicea, 2019). Below are some of the capabilities of the DevoLearn model.
 
 * **Segments images/videos of the _C. elegans_ embryo** and extract the centroids of the cells and save them into a CSV file.  
@@ -42,7 +19,7 @@ Extracting metadata from microscopic videos/images have been one of the key step
 
 DevoLearn has been made available as an open-source module, available on PyPI ([https://pypi.org/project/devolearn/](https://pypi.org/project/devolearn/)). All the deep-learning models used in devolearn are built and trained on PyTorch. The PyPI package itself does not contain the model weights, but the models are downloaded automatically once the user imports a certain model from the package. 
 
-## Technical Details  
+### Technical Details  
 DevoLearn 0.2.0 is optimized to segment and analyze high-resolution microscopy images such as those acquired using light sheet microscopy. The deep learning models used for embryo segmentation and cell lineage population prediction were both based on the ResNet18 architecture. Data from the EPIC dataset (Murray, 2012) was used to train the GAN (beta) and the lineage wise cell population prediction model. The embryo segmentation model was trained on a dataset sourced from Cao (2019b).
 
 ## Statement of Need
@@ -58,10 +35,10 @@ Devolearn has been built to be very data science friendly and to be highly compa
 
 The DevoLearn PyPI package is a part of the DevoLearn Github organization (https://github.com/devolearn), which serves as a comprehensive open-source research and educational resource. It aims to provide users with Data Science tutorials, web-based applications that offer other Deep Learning and Machine Learning tools for cell segmentation, and other educational resources.  We invite new collaborators to join us on a continual basis in maintaining and expanding the capabilities of the DevoLearn organization.  
 
-# Acknowledgements
+## Acknowledgements
 We would like to thank the OpenWorm Foundation, the International Neuroinformatics Coordinating Facility (INCF), and Google Summer of Code for their financial and institutional support. Gratitude also goes to the DevoWorm group for their expertise and feedback. 
 
-# References
+## References
 Alicea, B., Gordon, R., Kohrmann, A., Parent, J., and Varma, V. (2019). Pre-trained Machine Learning Models for Developmental Biology. _The Node blog_, October 29. doi:10.6084/m9.figshare.13347095.
 
 Alicea, B. and Gordon R. (2018). Cell Differentiation Processes as Spatial Networks: identifying four-dimensional structure in embryogenesis. _BioSystems, 173_, 235-246.  
