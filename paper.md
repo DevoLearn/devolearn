@@ -1,12 +1,10 @@
 # Pre-trained Models That Enable Computational Developmental Biology
 Mayukh Deb <SUP>1, 2</SUP>, Ujjwal Singh <SUP>1, 3</SUP>, Bradly Alicea <SUP>1, 4</SUP><BR>
-  <SUP>1</SUP>OpenWorm Foundation    
-  <SUP>2</SUP>Amrita Vishwa Vidyapeetham University  
-  <SUP>3</SUP>IIIT Delhi    
-  <SUP>4</SUP>Orthogonal Research and Education Lab
 
 ## Abstract
 TBA 
+
+<SUP>1</SUP>OpenWorm Foundation, <SUP>2</SUP>Amrita Vishwa Vidyapeetham University, <SUP>3</SUP>IIIT Delhi, <SUP>4</SUP>Orthogonal Research and Education Lab
 
 ## Summary
 Extracting metadata from microscopic videos/images have been one of the key steps in the process of finding emerging patterns from various biological processes. There have been many attempts to develop segmentation tools for cell shape and location (Cao, 2019a; Cao, 2019b; Chen, 2013). In particular, cell tracking methodologies provide quantitative summaries of cell centroid positions within an embryo (Ulman, 2006). Our pre-trained models (Devolearn) aim to speed up this process of collecting metadata by using robust deep learning models that can be used through a high level API. Devolearn’s primary focus is the _Caenorhabditis elegans_ embryo and specifically on the early embryogenesis process. This builds upon desired functionality that was first proposed by the DevoWorm group in (Alicea, 2019). Below are some of the capabilities of the DevoLearn model.
