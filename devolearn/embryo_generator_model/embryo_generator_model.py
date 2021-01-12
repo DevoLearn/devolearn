@@ -68,7 +68,7 @@ class embryo_generator_model():
     def __init__(self, mode = "cpu"):
 
         """
-        ngf = size of output image of the GAN 
+        ngf = size of feature maps in generator
         nz = size of latent space noise (latent vector)
         nc = number of color channels of the output image
         Do not tweak these unless you're changing the Generator() with a new model with a different architecture. 
@@ -79,11 +79,11 @@ class embryo_generator_model():
         self.nz = 128
         self.nc = 1
         self.generator= Generator(self.ngf, self.nz, self.nc)
-        self.model_url = "https://raw.githubusercontent.com/Mainakdeb/devolearn/master/devolearn/embryo_generator_model/embryo_generator.pth"
+        self.model_url = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/devolearn/embryo_generator_model/embryo_generator.pth"
         self.model_name = "embryo_generator.pth"
         self.model_dir = os.path.dirname(__file__)
         # print("at : ", os.path.dirname(__file__))
-        print("Searching here.. ",self.model_dir + "/" + self.model_name)
+        #print("Searching here.. ",self.model_dir + "/" + self.model_name)
 
         try:
             # print("model already downloaded, loading model...")
@@ -114,7 +114,7 @@ class embryo_generator_model():
         outputs{
             1 channel image as an <np.array> 
         }
-        The native size of the GAN's output is 128*128, and then it resizes the 
+        The native size of the GAN's output is 256*256, and then it resizes the 
         generated image to the desired size. 
         """
         with torch.no_grad():
@@ -149,7 +149,7 @@ class embryo_generator_model():
         
         for i in tqdm(range(n), desc = "generating images :"):
             filename = foldername + "/" + str(i) + ".jpg"
-            gen_image = self.generate()  ## 2d numpy arreay 
+            gen_image = self.generate()  ## 2d numpy array 
             cv2.imwrite(filename, gen_image)
 
         print ("Saved ", n, " images in", foldername)
