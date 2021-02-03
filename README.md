@@ -25,12 +25,10 @@
 pip install devolearn
 ```
 ### Example notebooks
-<code>
 <p align="center">
 <img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/nodes_matrix_long_smooth.gif" width = "40%" height="200">
 <img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/3d_node_map.gif" width = "40%" height="200">  
 </p>
-</code>
 
 * [Extracting centroid maps and making 3d centroid models](https://nbviewer.jupyter.org/github/DevoLearn/data-science-demos/blob/master/Networks/experiments_with_devolearn_node_maps.ipynb)
 
