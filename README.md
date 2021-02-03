@@ -26,15 +26,15 @@ pip install devolearn
 ```
 ### Example notebooks
 <p align="center">
-<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/nodes_matrix_long_smooth.gif" width = "40%" height="200">
-<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/3d_node_map.gif" width = "40%" height="200">  
+<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/nodes_matrix_long_smooth.gif" width = "40%">
+<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/3d_node_map.gif" width = "40%">  
 </p>
 
 * [Extracting centroid maps and making 3d centroid models](https://nbviewer.jupyter.org/github/DevoLearn/data-science-demos/blob/master/Networks/experiments_with_devolearn_node_maps.ipynb)
 
 ### Segmenting the C. elegans embryo 
 <p align="center">
-<img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/pred_centroids.gif" width = "90%">
+<img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/pred_centroids.gif" width = "80%">
 </p>
 
 * Importing the model
@@ -101,7 +101,7 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 ### Predicting populations of cells within the C. elegans embryo
 
 <p align="center">
-<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "70%" height ="200">
+<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "60%">
 </p>
 
 *  Importing the population model for inferences 
