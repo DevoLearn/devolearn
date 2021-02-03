@@ -15,6 +15,7 @@ import numpy as np
 from collections import deque
 import pandas as pd
 from tqdm import tqdm
+from tqdm.notebook import tqdm as tqdm_notebook
 import matplotlib.pyplot as plt
 
 
@@ -95,7 +96,7 @@ class lineage_population_model():
 
         return pred_dict
 
-    def predict_from_video(self, video_path, csv_name  = "foo.csv", save_csv = False, ignore_first_n_frames = 0, ignore_last_n_frames = 0):
+    def predict_from_video(self, video_path, csv_name  = "foo.csv", save_csv = False, ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False):
 
         """
         inputs{
@@ -104,6 +105,7 @@ class lineage_population_model():
             save_csv <bool> = set to True if you want to save the predictions into a CSV files
             ignore_first_n_frames <int> = number of frames to drop in the start of the video 
             ignore_last_n_frames <int> = number of frames to drop in the end of the video 
+            notebook_mode <bool> = toogle between script(False) and notebook(True), for better user interface
         }
 
 
@@ -139,12 +141,19 @@ class lineage_population_model():
             except:
                 print("skipped possible corrupt frame number : ", count)
             count += 1 
-
-        for i in tqdm(range(len(images)), desc='Predicting from video file:  :'):
-            tensor = self.transforms(images[i]).unsqueeze(0)
-            pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
-            pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
-            preds.append(pred_scaled)
+        
+        if notebook_mode == True:
+            for i in tqdm_notebook(range(len(images)), desc='Predicting from video file:  :'):
+                tensor = self.transforms(images[i]).unsqueeze(0)
+                pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
+                pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
+                preds.append(pred_scaled)
+        else :
+            for i in tqdm(range(len(images)), desc='Predicting from video file:  :'):
+                tensor = self.transforms(images[i]).unsqueeze(0)
+                pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
+                pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
+                preds.append(pred_scaled)
 
        
         df = pd.DataFrame(preds, columns = ["A", "E", "M", "P", "C", "D", "Z"]) 

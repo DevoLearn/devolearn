@@ -11,11 +11,11 @@ import cv2
 import wget
 import imutils
 from tqdm import tqdm
+from tqdm.notebook import tqdm as tqdm_notebook
 from PIL import Image
 import numpy as np
 from collections import deque
 import pandas as pd
-from tqdm import tqdm
 import matplotlib.pyplot as plt
 import segmentation_models_pytorch as smp
 import warnings
@@ -139,7 +139,7 @@ class embryo_segmentor():
             return centroid_image, centroids
             
 
-    def predict_from_video(self, video_path, pred_size = (350,250), save_folder = "preds", centroid_mode = False):
+    def predict_from_video(self, video_path, pred_size = (350,250), save_folder = "preds", centroid_mode = False, notebook_mode = False):
         vidObj = cv2.VideoCapture(video_path)   
         success = 1
         images = deque()
@@ -161,18 +161,31 @@ class embryo_segmentor():
         
         if os.path.isdir(save_folder) == False:
             os.mkdir(save_folder)
-       
-        for i in tqdm(range(len(images)), desc = "saving predictions: "):
-            save_name = save_folder + "/" + str(i) + ".jpg"
-            tensor = self.mini_transform(images[i]).unsqueeze(0)
-            res = self.model(tensor).detach().cpu().numpy()[0][0]
 
-            if centroid_mode == True:
-                res, centroids = generate_centroid_image(res)
-                filenames_centroids.append([save_name, centroids])
+        if notebook_mode == True:
+            for i in tqdm_notebook(range(len(images)), desc = "saving predictions: "):    
+                save_name = save_folder + "/" + str(i) + ".jpg"
+                tensor = self.mini_transform(images[i]).unsqueeze(0)
+                res = self.model(tensor).detach().cpu().numpy()[0][0]
 
-            res = cv2.resize(res,pred_size)
-            cv2.imwrite(save_name, res*255)
+                if centroid_mode == True:
+                    res, centroids = generate_centroid_image(res)
+                    filenames_centroids.append([save_name, centroids])
+
+                res = cv2.resize(res,pred_size)
+                cv2.imwrite(save_name, res*255)
+        else :
+            for i in tqdm(range(len(images)), desc = "saving predictions: "):
+                save_name = save_folder + "/" + str(i) + ".jpg"
+                tensor = self.mini_transform(images[i]).unsqueeze(0)
+                res = self.model(tensor).detach().cpu().numpy()[0][0]
+
+                if centroid_mode == True:
+                    res, centroids = generate_centroid_image(res)
+                    filenames_centroids.append([save_name, centroids])
+
+                res = cv2.resize(res,pred_size)
+                cv2.imwrite(save_name, res*255)
 
         if centroid_mode == True:
             df = pd.DataFrame(filenames_centroids, columns = ["filenames", "centroids"])
