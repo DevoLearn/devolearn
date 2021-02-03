@@ -26,15 +26,18 @@ pip install devolearn
 ```
 ### Example notebooks
 <code>
-<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/nodes_matrix_long_smooth.gif" width = "40%">
-<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/3d_node_map.gif" width = "30%">  
+<p align="center">
+<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/nodes_matrix_long_smooth.gif" width = "40%" height="200">
+<img src = "https://raw.githubusercontent.com/DevoLearn/data-science-demos/master/Networks/3d_node_map.gif" width = "40%" height="200">  
+</p>
 </code>
 
 * [Extracting centroid maps and making 3d centroid models](https://nbviewer.jupyter.org/github/DevoLearn/data-science-demos/blob/master/Networks/experiments_with_devolearn_node_maps.ipynb)
 
 ### Segmenting the C. elegans embryo 
-
+<p align="center">
 <img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/pred_centroids.gif" width = "90%">
+</p>
 
 * Importing the model
 ```python
@@ -70,7 +73,9 @@ df.to_csv("centroids.csv")
 ```
 
 ### Generating synthetic images of embryos with a Pre-trained GAN
+<p align="center">
 <img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/generated_embryos_3.gif" width = "30%">
+</p>
 
 * Importing the model
 ```python
@@ -97,8 +102,9 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 
 ### Predicting populations of cells within the C. elegans embryo
 
-
-<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "70%">
+<p align="center">
+<img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "70%" height ="200">
+</p>
 
 *  Importing the population model for inferences 
 ```python
