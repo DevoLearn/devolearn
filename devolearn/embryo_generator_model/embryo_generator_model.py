@@ -11,12 +11,12 @@ import os
 import cv2
 import wget
 from tqdm import tqdm
+from tqdm.notebook import tqdm as tqdm_notebook
 from PIL import Image
 import joblib
 import numpy as np
 from collections import deque
 import pandas as pd
-from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 
@@ -126,7 +126,7 @@ class embryo_generator_model():
         return im
 
 
-    def generate_n_images(self, n = 3, foldername = "generated_images", image_size = (700,500)):
+    def generate_n_images(self, n = 3, foldername = "generated_images", image_size = (700,500), notebook_mode = False):
         """
         reference{
             https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan
@@ -135,6 +135,7 @@ class embryo_generator_model():
             n <int> = number of images to generate
             foldername <str> = name of the folder where the images whould be saved. 
             The function automatically generates a folder if it doesn't exist 
+            notebook_mode <bool> = toogle between script(False) and notebook(True), for better user interface
         }
         outputs{
             None
@@ -146,10 +147,15 @@ class embryo_generator_model():
         if os.path.isdir(foldername) == False:
             os.mkdir(foldername)
 
-        
-        for i in tqdm(range(n), desc = "generating images :"):
-            filename = foldername + "/" + str(i) + ".jpg"
-            gen_image = self.generate()  ## 2d numpy array 
-            cv2.imwrite(filename, gen_image)
+        if notebook_mode == True:
+            for i in tqdm_notebook(range(n), desc = "generating images :"):
+                filename = foldername + "/" + str(i) + ".jpg"
+                gen_image = self.generate()  ## 2d numpy array 
+                cv2.imwrite(filename, gen_image)
+        else:
+            for i in tqdm(range(n), desc = "generating images :"):
+                filename = foldername + "/" + str(i) + ".jpg"
+                gen_image = self.generate()  ## 2d numpy array 
+                cv2.imwrite(filename, gen_image)
 
         print ("Saved ", n, " images in", foldername)
