@@ -6,4 +6,4 @@ build/
 devolearn.egg-info/
 dist/
 centroids.csv
-
+.vscode/
