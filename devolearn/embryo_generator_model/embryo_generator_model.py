@@ -66,7 +66,7 @@ class Generator(nn.Module):
 
 
 class embryo_generator_model():   
-    def __init__(self, mode = "cpu", index = 0):
+    def __init__(self, device = "cpu"):
 
         """
         ngf = size of feature maps in generator
@@ -75,10 +75,7 @@ class embryo_generator_model():
         Do not tweak these unless you're changing the Generator() with a new model with a different architecture. 
     
         """
-        if mode == "cpu":
-          self.device = torch.device("cpu")
-        else :
-          self.device = torch.device("cuda:"+str(index))
+        self.device = device
         self.ngf = 128 ## generated image size 
         self.nz = 128
         self.nc = 1

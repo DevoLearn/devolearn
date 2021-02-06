@@ -64,18 +64,14 @@ def generate_centroid_image(thresh):
     return centroid_image, centroids
 
 class embryo_segmentor():
-    def __init__(self,mode = "cpu" , index = 0):
+    def __init__(self, device = "cpu"):
         
         """
         Segments the c. elegans embryo from images/videos, 
         depends on segmentation-models-pytorch for the model backbone
 
         """
-        if mode == "cpu":
-          self.device = torch.device("cpu")
-        else :
-          self.device = torch.device("cuda:"+str(index))
-
+        self.device = device
         self.ENCODER = 'resnet18'
         self.ENCODER_WEIGHTS = 'imagenet'
         self.CLASSES = ["nucleus"]

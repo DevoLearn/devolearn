@@ -26,11 +26,9 @@ ResNet18 to determine population of cells in an embryo
 """
 
 class lineage_population_model():   
-    def __init__(self, mode = "cpu", index = 0):
-        if mode == "cpu":
-          self.device = torch.device("cpu")
-        else :
-          self.device = torch.device("cuda:"+str(index))
+    def __init__(self, device = "cpu"):
+        
+        self.device = device
         self.model = models.resnet18(pretrained = True)
         self.model.fc = nn.Linear(512, 7)  ## resize last layer
         self.model_dir = os.path.dirname(__file__)
