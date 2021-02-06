@@ -1,5 +1,4 @@
 cycler==0.10.0
-dataclasses==0.8
 decorator==4.4.2
 efficientnet-pytorch==0.6.3
 future==0.18.2
