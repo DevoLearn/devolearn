@@ -3,7 +3,7 @@ from .embryo_generator_model import *
 from .embryo_segmentor import *
 from .tests import test ## tests/test.py/<class test()>
 
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 
 ## folder names below
 __all__ = ["lineage_populaton_model",
