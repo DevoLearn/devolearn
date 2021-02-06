@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="devolearn",
-    version="0.2.1",
+    version="0.2.2",
     author="Mayukh Deb, Ujjwal Singh, Bradly Alicea", 
     author_email="mayukhmainak2000@gmail.com, ujjwal18113@iiitd.ac.in, balicea@openworm.org", #Subject to change, we can also use Devolearn official Email address.
     description="Accelerate data driven research in developmental biology with deep learning models",
