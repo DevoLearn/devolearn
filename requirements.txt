@@ -1,7 +1,6 @@
 cycler==0.10.0
 dataclasses==0.8
 decorator==4.4.2
-devolearn==0.2.1
 efficientnet-pytorch==0.6.3
 future==0.18.2
 imageio==2.9.0
