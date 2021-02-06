@@ -5,6 +5,7 @@ import torchvision
 import torchvision.transforms as transforms
 from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
+from torch.autograd import Variable
 
 import os
 import cv2
@@ -63,19 +64,22 @@ def generate_centroid_image(thresh):
     return centroid_image, centroids
 
 class embryo_segmentor():
-    def __init__(self):
+    def __init__(self,mode = "cpu" , index = 0):
         
         """
         Segments the c. elegans embryo from images/videos, 
         depends on segmentation-models-pytorch for the model backbone
 
         """
+        if mode == "cpu":
+          self.device = torch.device("cpu")
+        else :
+          self.device = torch.device("cuda:"+str(index))
 
         self.ENCODER = 'resnet18'
         self.ENCODER_WEIGHTS = 'imagenet'
         self.CLASSES = ["nucleus"]
         self.ACTIVATION = 'sigmoid'
-        self.DEVICE = 'cpu'
         self.in_channels = 1
         self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/embryo_segmentor/3d_segmentation_model.pth"
         self.model_name = "3d_segmentation_model.pth"
@@ -92,16 +96,16 @@ class embryo_segmentor():
 
         try:
             # print("model already downloaded, loading model...")
-            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu") 
+            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device) 
         except:
             print("model not found, downloading from:", self.model_url)
             if os.path.isdir(self.model_dir) == False:
                 os.mkdir(self.model_dir)
             filename = wget.download(self.model_url, out= self.model_dir)
             # print(filename)
-            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu") 
+            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device) 
 
-
+        self.model.to(self.device)
         self.model.eval()
 
         self.mini_transform = transforms.Compose([
@@ -130,7 +134,8 @@ class embryo_segmentor():
 
         im = cv2.imread(image_path,0)
         tensor = self.mini_transform(im).unsqueeze(0)
-        res = self.model(tensor).detach().cpu().numpy()[0][0]
+        device_tensor = Variable(tensor.to(self.device))
+        res = self.model(device_tensor).detach().cpu().numpy()[0][0]
         res = cv2.resize(res,pred_size)
         if centroid_mode == False:
             return res
@@ -166,7 +171,8 @@ class embryo_segmentor():
             for i in tqdm_notebook(range(len(images)), desc = "saving predictions: "):    
                 save_name = save_folder + "/" + str(i) + ".jpg"
                 tensor = self.mini_transform(images[i]).unsqueeze(0)
-                res = self.model(tensor).detach().cpu().numpy()[0][0]
+                device_tensor = Variable(tensor.to(self.device))
+                res = self.model(device_tensor).detach().cpu().numpy()[0][0]
 
                 if centroid_mode == True:
                     res, centroids = generate_centroid_image(res)
@@ -178,7 +184,8 @@ class embryo_segmentor():
             for i in tqdm(range(len(images)), desc = "saving predictions: "):
                 save_name = save_folder + "/" + str(i) + ".jpg"
                 tensor = self.mini_transform(images[i]).unsqueeze(0)
-                res = self.model(tensor).detach().cpu().numpy()[0][0]
+                device_tensor = Variable(tensor.to(self.device))
+                res = self.model(device_tensor).detach().cpu().numpy()[0][0]
 
                 if centroid_mode == True:
                     res, centroids = generate_centroid_image(res)

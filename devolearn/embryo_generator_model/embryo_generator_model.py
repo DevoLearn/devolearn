@@ -6,6 +6,7 @@ import torchvision.transforms as transforms
 from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
 import torchvision.models as models
+from torch.autograd import Variable
 
 import os
 import cv2
@@ -65,7 +66,7 @@ class Generator(nn.Module):
 
 
 class embryo_generator_model():   
-    def __init__(self, mode = "cpu"):
+    def __init__(self, mode = "cpu", index = 0):
 
         """
         ngf = size of feature maps in generator
@@ -74,11 +75,14 @@ class embryo_generator_model():
         Do not tweak these unless you're changing the Generator() with a new model with a different architecture. 
     
         """
-
+        if mode == "cpu":
+          self.device = torch.device("cpu")
+        else :
+          self.device = torch.device("cuda:"+str(index))
         self.ngf = 128 ## generated image size 
         self.nz = 128
         self.nc = 1
-        self.generator= Generator(self.ngf, self.nz, self.nc)
+        self.generator = Generator(self.ngf, self.nz, self.nc)
         self.model_url = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/devolearn/embryo_generator_model/embryo_generator.pth"
         self.model_name = "embryo_generator.pth"
         self.model_dir = os.path.dirname(__file__)
@@ -87,15 +91,16 @@ class embryo_generator_model():
 
         try:
             # print("model already downloaded, loading model...")
-            self.generator.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
+            self.generator.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= self.device))
         except:
             print("model not found, downloading from: ", self.model_url)
             if os.path.isdir(self.model_dir) == False:
                 os.mkdir(self.model_dir)
             filename = wget.download(self.model_url, out= self.model_dir)
             # print(filename)
-            self.generator.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
-
+            self.generator.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= self.device))
+        
+        self.generator.to(self.device)
 
 
         
@@ -119,7 +124,8 @@ class embryo_generator_model():
         """
         with torch.no_grad():
             noise = torch.randn([1,128,1,1])
-            im = self.generator(noise)[0][0].cpu().detach().numpy()
+            device_noise = Variable(noise.to(self.device))
+            im = self.generator(device_noise)[0][0].cpu().detach().numpy()
         im = cv2.resize(im, image_size)
         im = 255 - cv2.convertScaleAbs(im, alpha=(255.0))   ## temporary fix against inverted images 
 

@@ -5,6 +5,7 @@ import torchvision.transforms as transforms
 from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
 import torchvision.models as models
+from torch.autograd import Variable
 
 import os
 import cv2
@@ -25,8 +26,11 @@ ResNet18 to determine population of cells in an embryo
 """
 
 class lineage_population_model():   
-    def __init__(self, mode = "cpu"):
-        self.mode = mode
+    def __init__(self, mode = "cpu", index = 0):
+        if mode == "cpu":
+          self.device = torch.device("cpu")
+        else :
+          self.device = torch.device("cuda:"+str(index))
         self.model = models.resnet18(pretrained = True)
         self.model.fc = nn.Linear(512, 7)  ## resize last layer
         self.model_dir = os.path.dirname(__file__)
@@ -39,14 +43,14 @@ class lineage_population_model():
 
         try:
             # print("model already downloaded, loading model...")
-            self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
+            self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= self.device))
         except:
             print("model not found, downloading from:", self.model_url)
             filename = wget.download(self.model_url, out= self.model_dir)
             # print(filename)
-            self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= "cpu"))
+            self.model.load_state_dict(torch.load(self.model_dir + "/" + self.model_name, map_location= self.device))
 
-
+        self.model.to(self.device)
         self.model.eval()
 
         self.transforms = transforms.Compose([
@@ -79,8 +83,8 @@ class lineage_population_model():
         image = cv2.imread(image_path, 0)
         image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
         tensor = self.transforms(image).unsqueeze(0)
-        
-        pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
+        device_tensor = Variable(tensor.to(self.device))
+        pred = self.model(device_tensor).detach().cpu().numpy().reshape(1,-1)
 
         pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
 
@@ -145,13 +149,15 @@ class lineage_population_model():
         if notebook_mode == True:
             for i in tqdm_notebook(range(len(images)), desc='Predicting from video file:  :'):
                 tensor = self.transforms(images[i]).unsqueeze(0)
-                pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
+                device_tensor = Variable(tensor.to(self.device))
+                pred = self.model(device_tensor).detach().cpu().numpy().reshape(1,-1)
                 pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
                 preds.append(pred_scaled)
         else :
             for i in tqdm(range(len(images)), desc='Predicting from video file:  :'):
                 tensor = self.transforms(images[i]).unsqueeze(0)
-                pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
+                device_tensor = Variable(tensor.to(self.device))
+                pred = self.model(device_tensor).detach().cpu().numpy().reshape(1,-1)
                 pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
                 preds.append(pred_scaled)
 
@@ -180,7 +186,7 @@ class lineage_population_model():
 
 
         
-    def create_population_plot_from_video(self, video_path, save_plot = False, plot_name = "plot.png", ignore_first_n_frames = 0, ignore_last_n_frames = 0 ):
+    def create_population_plot_from_video(self, video_path, save_plot = False, plot_name = "plot.png", ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False):
 
         """
         inputs{
@@ -189,6 +195,7 @@ class lineage_population_model():
             plot_name <str> = filename of the plot image to be saved 
             ignore_first_n_frames <int> = number of frames to drop in the start of the video 
             ignore_last_n_frames <int> = number of frames to drop in the end of the video 
+            notebook_mode <bool> = toogle between script(False) and notebook(True), for better user interface
         }
 
         outputs{
@@ -198,7 +205,7 @@ class lineage_population_model():
         plots all the predictions from a video into a matplotlib.pyplot 
         
         """
-        df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames )  
+        df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames, notebook_mode = notebook_mode)  
         
         labels = ["A", "E", "M", "P", "C", "D", "Z"]
 
