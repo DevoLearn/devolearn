@@ -21,7 +21,7 @@ pyparsing==2.4.7
 python-dateutil==2.8.1
 pytz==2019.3
 PyWavelets==1.1.1
-scikit-image==0.18.1
+scikit-image
 scikit-learn==0.24.0
 scipy==1.5.4
 segmentation-models-pytorch==0.1.3
