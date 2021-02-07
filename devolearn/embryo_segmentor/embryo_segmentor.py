@@ -5,7 +5,6 @@ import torchvision
 import torchvision.transforms as transforms
 from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
-from torch.autograd import Variable
 
 import os
 import cv2
@@ -129,9 +128,8 @@ class embryo_segmentor():
         """
 
         im = cv2.imread(image_path,0)
-        tensor = self.mini_transform(im).unsqueeze(0)
-        device_tensor = Variable(tensor.to(self.device))
-        res = self.model(device_tensor).detach().cpu().numpy()[0][0]
+        tensor = self.mini_transform(im).unsqueeze(0).to(self.device)
+        res = self.model(tensor).detach().cpu().numpy()[0][0]
         res = cv2.resize(res,pred_size)
         if centroid_mode == False:
             return res
@@ -166,9 +164,8 @@ class embryo_segmentor():
         if notebook_mode == True:
             for i in tqdm_notebook(range(len(images)), desc = "saving predictions: "):    
                 save_name = save_folder + "/" + str(i) + ".jpg"
-                tensor = self.mini_transform(images[i]).unsqueeze(0)
-                device_tensor = Variable(tensor.to(self.device))
-                res = self.model(device_tensor).detach().cpu().numpy()[0][0]
+                tensor = self.mini_transform(images[i]).unsqueeze(0).to(self.device)
+                res = self.model(tensor).detach().cpu().numpy()[0][0]
 
                 if centroid_mode == True:
                     res, centroids = generate_centroid_image(res)
@@ -179,9 +176,8 @@ class embryo_segmentor():
         else :
             for i in tqdm(range(len(images)), desc = "saving predictions: "):
                 save_name = save_folder + "/" + str(i) + ".jpg"
-                tensor = self.mini_transform(images[i]).unsqueeze(0)
-                device_tensor = Variable(tensor.to(self.device))
-                res = self.model(device_tensor).detach().cpu().numpy()[0][0]
+                tensor = self.mini_transform(images[i]).unsqueeze(0).to(self.device)
+                res = self.model(tensor).detach().cpu().numpy()[0][0]
 
                 if centroid_mode == True:
                     res, centroids = generate_centroid_image(res)

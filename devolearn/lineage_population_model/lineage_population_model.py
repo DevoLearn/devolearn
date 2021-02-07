@@ -5,7 +5,6 @@ import torchvision.transforms as transforms
 from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
 import torchvision.models as models
-from torch.autograd import Variable
 
 import os
 import cv2
@@ -80,9 +79,8 @@ class lineage_population_model():
 
         image = cv2.imread(image_path, 0)
         image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
-        tensor = self.transforms(image).unsqueeze(0)
-        device_tensor = Variable(tensor.to(self.device))
-        pred = self.model(device_tensor).detach().cpu().numpy().reshape(1,-1)
+        tensor = self.transforms(image).unsqueeze(0).to(self.device)
+        pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
 
         pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
 
@@ -146,16 +144,14 @@ class lineage_population_model():
         
         if notebook_mode == True:
             for i in tqdm_notebook(range(len(images)), desc='Predicting from video file:  :'):
-                tensor = self.transforms(images[i]).unsqueeze(0)
-                device_tensor = Variable(tensor.to(self.device))
-                pred = self.model(device_tensor).detach().cpu().numpy().reshape(1,-1)
+                tensor = self.transforms(images[i]).unsqueeze(0).to(self.device)
+                pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
                 pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
                 preds.append(pred_scaled)
         else :
             for i in tqdm(range(len(images)), desc='Predicting from video file:  :'):
-                tensor = self.transforms(images[i]).unsqueeze(0)
-                device_tensor = Variable(tensor.to(self.device))
-                pred = self.model(device_tensor).detach().cpu().numpy().reshape(1,-1)
+                tensor = self.transforms(images[i]).unsqueeze(0).to(self.device)
+                pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
                 pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
                 preds.append(pred_scaled)
 

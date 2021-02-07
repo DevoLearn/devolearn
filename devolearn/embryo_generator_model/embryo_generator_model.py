@@ -6,7 +6,6 @@ import torchvision.transforms as transforms
 from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
 import torchvision.models as models
-from torch.autograd import Variable
 
 import os
 import cv2
@@ -120,9 +119,8 @@ class embryo_generator_model():
         generated image to the desired size. 
         """
         with torch.no_grad():
-            noise = torch.randn([1,128,1,1])
-            device_noise = Variable(noise.to(self.device))
-            im = self.generator(device_noise)[0][0].cpu().detach().numpy()
+            noise = torch.randn([1,128,1,1]).to(self.device)
+            im = self.generator(noise)[0][0].cpu().detach().numpy()
         im = cv2.resize(im, image_size)
         im = 255 - cv2.convertScaleAbs(im, alpha=(255.0))   ## temporary fix against inverted images 
 
