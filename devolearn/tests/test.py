@@ -20,7 +20,7 @@ class test(unittest.TestCase):
     def test_lineage_population_model(self):
         test_dir = os.path.dirname(__file__)
 
-        model = lineage_population_model(mode = "cpu")
+        model = lineage_population_model(device = "cpu")
         pred = model.predict(image_path = test_dir + "/" + "sample_data/images/embryo_sample.png")
         self.assertTrue(isinstance(pred, dict), "should be dict")
 
