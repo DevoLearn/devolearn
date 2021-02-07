@@ -10,8 +10,7 @@ import torchvision.models as models
 import os
 import cv2
 import wget
-from tqdm import tqdm
-from tqdm.notebook import tqdm as tqdm_notebook
+from tqdm import tqdm, tqdm_notebook
 from PIL import Image
 import joblib
 import numpy as np

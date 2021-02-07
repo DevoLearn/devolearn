@@ -10,8 +10,7 @@ import os
 import cv2
 import wget
 import imutils
-from tqdm import tqdm
-from tqdm.notebook import tqdm as tqdm_notebook
+from tqdm import tqdm, tqdm_notebook
 from PIL import Image
 import numpy as np
 from collections import deque
