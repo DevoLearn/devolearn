@@ -25,19 +25,14 @@ warnings.filterwarnings("ignore")
 """
 
 def generate_centroid_image(thresh):
-
-    """
-    used when centroid_mode == True
-
-    input{
-        thresh <np.array> = 2d numpy array that is returned from the segmentation model
-    }
-    outputs{
-        centroid_image = image containing the contours and their respective centroids 
-        centroids = list of all centroids for the given image as [(x1,y1), (x2,y2)...]
-    }
+    """Used when centroid_mode is set to True
  
+    Args:
+        thresh (np.array): 2d numpy array that is returned from the segmentation model
 
+    Returns:
+        np.array : image containing the contours and their respective centroids 
+        list : list of all centroids for the given image as [(x1,y1), (x2,y2)...]
     """
 
     thresh = cv2.blur(thresh, (5,5))
@@ -63,11 +58,11 @@ def generate_centroid_image(thresh):
 
 class embryo_segmentor():
     def __init__(self, device = "cpu"):
-        
-        """
-        Segments the c. elegans embryo from images/videos, 
+        """Segments the c. elegans embryo from images/videos, 
         depends on segmentation-models-pytorch for the model backbone
 
+        Args:
+            device (str, optional): set to "cuda", runs operations on gpu and set to "cpu", runs operations on cpu. Defaults to "cpu".
         """
         self.device = device
         self.ENCODER = 'resnet18'
@@ -110,20 +105,23 @@ class embryo_segmentor():
 
 
     def predict(self, image_path, pred_size = (350,250), centroid_mode = False):
-
-        """
+        """Loads an image from image_path and converts it to grayscale, 
+        then passes it though the model and returns centroids of the segmented features.
         reference{
             https://github.com/DevoLearn/devolearn#segmenting-the-c-elegans-embryo
-        } 
-        inputs{
-            image_path <str> = path to image
-            pred_size <tuple> = (width,height) of the image to be returned, the default size of the model output is (256,256)
-            centroid_mode <bool> = set to true to return both the segmented image and the list of centroids 
         }
-        outputs{
-            1 channel image as an <np.array> 
-            optional <list> containing centroids 
-        }
+
+        Args:
+            image_path (str): path to image
+            pred_size (tuple, optional): size of output image,(width,height). Defaults to (350,250).
+            centroid_mode (bool, optional): set to true to return both the segmented image and the list of centroids. Defaults to False.
+
+        Returns:
+            centroid_mode set to False:
+                np.array : 1 channel image.
+            centroid_mode set to True:
+                np.array : 1 channel image,
+                list : list of centroids.
         """
 
         im = cv2.imread(image_path,0)
@@ -138,6 +136,23 @@ class embryo_segmentor():
             
 
     def predict_from_video(self, video_path, pred_size = (350,250), save_folder = "preds", centroid_mode = False, notebook_mode = False):
+        """Splits a video from video_path into frames and passes the 
+        frames through the model for predictions. Saves predicted images in save_folder.
+        And optionally saves all the centroid predictions into a pandas.DataFrame. 
+
+        Args:
+            video_path (str): path to the video file.
+            pred_size (tuple, optional): size of output image,(width,height). Defaults to (350,250).
+            save_folder (str, optional): path to folder to be saved in. Defaults to "preds".
+            centroid_mode (bool, optional): set to true to return both the segmented image and the list of centroids. Defaults to False.
+            notebook_mode (bool, optional): toogle between script(False) and notebook(True), for better user interface. Defaults to False.
+
+        Returns:
+            centroid_mode set to True:
+                pd.DataFrame : containing file name and their centriods
+            centroid_mode set to False:
+                list : list containing the names of the entries in the save_folder directory 
+        """
         vidObj = cv2.VideoCapture(video_path)   
         success = 1
         images = deque()

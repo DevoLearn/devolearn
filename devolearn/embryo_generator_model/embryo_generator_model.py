@@ -27,6 +27,13 @@ GAN to generate images of embryos
 
 class Generator(nn.Module):
     def __init__(self, ngf, nz, nc):
+        """GAN generator to generate synthetic images of embryos
+
+        Args:
+            ngf (int): size of feature maps in generator
+            nz (int): size of latent space noise (latent vector)
+            nc (int): number of color channels of the output image
+        """
         super().__init__()
         self.main = nn.Sequential(
             # input is Z, going into a convolution
@@ -65,13 +72,11 @@ class Generator(nn.Module):
 
 class embryo_generator_model():   
     def __init__(self, device = "cpu"):
-
-        """
-        ngf = size of feature maps in generator
-        nz = size of latent space noise (latent vector)
-        nc = number of color channels of the output image
+        """Generate synthetic single or multiple images of embryos.
         Do not tweak these unless you're changing the Generator() with a new model with a different architecture. 
-    
+
+        Args:
+            device (str, optional): set to "cuda", runs operations on gpu and set to "cpu", runs operations on cpu. Defaults to "cpu".
         """
         self.device = device
         self.ngf = 128 ## generated image size 
@@ -103,19 +108,17 @@ class embryo_generator_model():
 
 
     def generate(self, image_size = (700,500)):
-
-        """
+        """Generate one synthetic image of embryo.
+        The native size of the GAN's output is 256*256, and then it resizes the generated image to the desired size. 
         reference{
             https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan
         }
-        inputs{
-            image_size <tuple> = (width,height of the generated image)
-        }
-        outputs{
-            1 channel image as an <np.array> 
-        }
-        The native size of the GAN's output is 256*256, and then it resizes the 
-        generated image to the desired size. 
+
+        Args:
+            image_size (tuple, optional): size of generated image,(width,height). Defaults to (700,500).
+
+        Returns:
+            np.array : 1 channel image 
         """
         with torch.no_grad():
             noise = torch.randn([1,128,1,1]).to(self.device)
@@ -127,21 +130,15 @@ class embryo_generator_model():
 
 
     def generate_n_images(self, n = 3, foldername = "generated_images", image_size = (700,500), notebook_mode = False):
-        """
+        """This is an extension of the generator.generate() function for generating multiple images at once and saving them into a folder. 
         reference{
             https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan
         }
-        inputs{
-            n <int> = number of images to generate
-            foldername <str> = name of the folder where the images whould be saved. 
-            The function automatically generates a folder if it doesn't exist 
-            notebook_mode <bool> = toogle between script(False) and notebook(True), for better user interface
-        }
-        outputs{
-            None
-        }
-        
-        This is an extension of the generator.generate() function for generating multiple images at once and saving them into a folder. 
+        Args:
+            n (int, optional): number of images to generate. Defaults to 3.
+            foldername (str, optional): name of the folder where the images whould be savedThe function automatically generates a folder if it doesn't exist. Defaults to "generated_images".
+            image_size (tuple, optional): size of generated image,(width,height). Defaults to (700,500).
+            notebook_mode (bool, optional): toogle between script(False) and notebook(True), for better user interface. Defaults to False.
         """
 
         if os.path.isdir(foldername) == False:

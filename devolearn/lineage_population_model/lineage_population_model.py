@@ -25,7 +25,11 @@ ResNet18 to determine population of cells in an embryo
 
 class lineage_population_model():   
     def __init__(self, device = "cpu"):
-        
+        """Estimate lineage populations of C. elegans embroys from videos/photos and plotting predictions.
+
+        Args:
+            device (str, optional): set to "cuda", runs operations on gpu and set to "cpu", runs operations on cpu. Defaults to "cpu".
+        """
         self.device = device
         self.model = models.resnet18(pretrained = True)
         self.model.fc = nn.Linear(512, 7)  ## resize last layer
@@ -57,25 +61,20 @@ class lineage_population_model():
                                             ])
 
     def predict(self, image_path):
-
-        """
-        reference{
-            https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo
-        } 
-        input{
-            image path <str>
-        }
-
-        output{
-            dictionary containing the cell population values <dict>
-        }
-
-        Loads an image from image_path and converts it to grayscale, 
+        """Loads an image from image_path and converts it to grayscale, 
         then passes it though the model and returns a dictionary 
         with the scaled output (see self.scaler)
 
-        """
+        reference{
+            https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo
+        }
 
+        Args:
+            image_path (str): path to image.
+
+        Returns:
+            dict: dictionary containing the cell population values
+        """
         image = cv2.imread(image_path, 0)
         image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
         tensor = self.transforms(image).unsqueeze(0).to(self.device)
@@ -96,29 +95,23 @@ class lineage_population_model():
         return pred_dict
 
     def predict_from_video(self, video_path, csv_name  = "foo.csv", save_csv = False, ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False):
-
-        """
-        inputs{
-            video path <str> = path to video file 
-            csv_name <str> = filename to be used to save the predictions 
-            save_csv <bool> = set to True if you want to save the predictions into a CSV files
-            ignore_first_n_frames <int> = number of frames to drop in the start of the video 
-            ignore_last_n_frames <int> = number of frames to drop in the end of the video 
-            notebook_mode <bool> = toogle between script(False) and notebook(True), for better user interface
-        }
-
-
-        output{
-            DataFrame containing all the preds with the corresponding column name <pandas.DataFrame>
-        }
-        
-        Splits a video from video_path into frames and passes the 
+        """Splits a video from video_path into frames and passes the 
         frames through the model for predictions. Saves all the predictions
         into a pandas.DataFrame which can be optionally saved as a CSV file.
 
         The model was trained to make predictions upto the 
-        stage where the population of "A" lineage is 250
+        stage where the population of "A" lineage is 250        
 
+        Args:
+            video_path (str): path to video file
+            csv_name (str, optional): filename to be used to save the predictions. Defaults to "foo.csv".
+            save_csv (bool, optional): set to True if you want to save the predictions into a CSV files. Defaults to False.
+            ignore_first_n_frames (int, optional): number of frames to drop in the start of the video. Defaults to 0.
+            ignore_last_n_frames (int, optional): number of frames to drop in the end of the video. Defaults to 0.
+            notebook_mode (bool, optional): toogle between script(False) and notebook(True), for better user interface. Defaults to False.
+
+        Returns:
+            pandas.DataFrame : DataFrame containing all the preds with the corresponding column name
         """
         A_population_upper_limit = 250
 
@@ -180,23 +173,18 @@ class lineage_population_model():
 
         
     def create_population_plot_from_video(self, video_path, save_plot = False, plot_name = "plot.png", ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False):
+        """Plots all the predictions from a video into a matplotlib.pyplot 
 
-        """
-        inputs{
-            video_path <str> = path to video file 
-            save_plot <bool> = set to True to save the plot as an image file 
-            plot_name <str> = filename of the plot image to be saved 
-            ignore_first_n_frames <int> = number of frames to drop in the start of the video 
-            ignore_last_n_frames <int> = number of frames to drop in the end of the video 
-            notebook_mode <bool> = toogle between script(False) and notebook(True), for better user interface
-        }
+        Args:
+            video_path ([type]): path to video file
+            save_plot (bool, optional): set to True to save the plot as an image file. Defaults to False.
+            plot_name (str, optional): filename of the plot image to be saved. Defaults to "plot.png".
+            ignore_first_n_frames (int, optional): number of frames to drop in the start of the video. Defaults to 0.
+            ignore_last_n_frames (int, optional): number of frames to drop in the end of the video. Defaults to 0.
+            notebook_mode (bool, optional): toogle between script(False) and notebook(True), for better user interface. Defaults to False.
 
-        outputs{
-            plot object which can be customized further <matplotlib.pyplot>
-        }
-
-        plots all the predictions from a video into a matplotlib.pyplot 
-        
+        Returns:
+             matplotlib.pyplot : plot object which can be customized further
         """
         df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames, notebook_mode = notebook_mode)  
         
