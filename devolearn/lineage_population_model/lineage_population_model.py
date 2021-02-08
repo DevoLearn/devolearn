@@ -14,8 +14,7 @@ import joblib
 import numpy as np
 from collections import deque
 import pandas as pd
-from tqdm import tqdm
-from tqdm.notebook import tqdm as tqdm_notebook
+from tqdm import tqdm, tqdm_notebook
 import matplotlib.pyplot as plt
 
 
