@@ -104,7 +104,7 @@ generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (
 <img src = "https://raw.githubusercontent.com/devoworm/GSoC-2020/master/Pre-trained%20Models%20(DevLearning)/images/resnet_preds_with_input.gif" width = "60%">
 </p>
 
-*  Importing the population model for inferences 
+* Importing the population model for inferences 
 ```python
 from devolearn import lineage_population_model
 ```
@@ -129,6 +129,14 @@ results = model.predict_from_video(video_path = "sample_data/videos/embryo_timel
 plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0 )
 plot.show()
 ```
+## Links to Datasets
+* **Segmenting the C. elegans embryo**
+    * The model was trained on the [WormImage dataset](https://www.wormimage.org/) with manually labelled masks. You can download the segmentation datset [from this link](https://github.com/devoworm/GSoC-2020/raw/master/Pre-trained%20Models%20(DevLearning)/notebooks/embryo_segmentation/data/image_data.tar.xz). 
+* **Generating synthetic images of embryos with a Pre-trained GAN**
+    * The GAN was primarily trained on images from [EPIC dataset](https://epic.gs.washington.edu/).
+* **Predicting populations of cells within the C. elegans embryo**
+    * The model was trained on videos sourced from the [EPIC dataset](http://epic.gs.washington.edu/).
+
 ## Contact us
 ### Authors/maintainers:
 * [Mayukh Deb](https://twitter.com/mayukh091)
