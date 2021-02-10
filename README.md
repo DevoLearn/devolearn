@@ -131,7 +131,7 @@ plot.show()
 ```
 ## Links to Datasets
 * **Segmenting the C. elegans embryo**
-    * The dataset was sourced from [3DMMS](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/). You can download the segmentation datset [from this link](https://github.com/devoworm/GSoC-2020/raw/master/Pre-trained%20Models%20(DevLearning)/notebooks/embryo_segmentation/data/image_data.tar.xz). 
+    * The dataset was sourced from [3DMMS](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/).
 * **Generating synthetic images of embryos with a Pre-trained GAN**
     * The GAN was primarily trained on images from [EPIC dataset](https://epic.gs.washington.edu/).
 * **Predicting populations of cells within the C. elegans embryo**
