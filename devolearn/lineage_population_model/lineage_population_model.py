@@ -36,8 +36,8 @@ class lineage_population_model():
         self.model_dir = os.path.dirname(__file__)
         self.scaler = joblib.load(self.model_dir + "/" + 'scaler/scaler.gz')
 
-        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/lineage_population_model/estimate_lineage_population.pt"
-        self.model_name = "estimate_lineage_population.pt"
+        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/lineage_population_model/estimate_lineage_population.pth"
+        self.model_name = "estimate_lineage_population.pth"
         # print("at : ", os.path.dirname(__file__))
 
 
