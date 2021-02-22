@@ -129,16 +129,14 @@ results = model.predict_from_video(video_path = "sample_data/videos/embryo_timel
 plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0 )
 plot.show()
 ```
-## Links to Datasets
-* **Segmenting the C. elegans embryo**
-    * The dataset was sourced from [3DMMS](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/).
-* **Generating synthetic images of embryos with a Pre-trained GAN**
-    * The GAN was primarily trained on images from [EPIC dataset](https://epic.gs.washington.edu/).
-* **Predicting populations of cells within the C. elegans embryo**
-    * The model was trained on videos sourced from the [EPIC dataset](http://epic.gs.washington.edu/).
 
-## Contact us
-### Authors/maintainers:
+## Links to Datasets
+| **Model**                                       | **Data source**                                                                                                                                                   |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Segmenting the C. elegans embryo                | [3DMMS: robust 3D Membrane Morphological Segmentation of C. elegans embryo](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/) |
+| Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)                                                                                    
+
+## Authors/maintainers:
 * [Mayukh Deb](https://twitter.com/mayukh091)
 * [Ujjwal Singh](https://twitter.com/ujjjwalll)
 * [Dr. Bradly Alicea](https://twitter.com/balicea1)
