@@ -64,6 +64,7 @@ class embryo_segmentor():
         Args:
             device (str, optional): set to "cuda", runs operations on gpu and set to "cpu", runs operations on cpu. Defaults to "cpu".
         """
+        
         self.device = device
         self.ENCODER = 'resnet18'
         self.ENCODER_WEIGHTS = 'imagenet'
@@ -106,7 +107,7 @@ class embryo_segmentor():
 
     def predict(self, image_path, pred_size = (350,250), centroid_mode = False):
         """Loads an image from image_path and converts it to grayscale, 
-        then passes it though the model and returns centroids of the segmented features.
+        then passes it through the model and returns centroids of the segmented features.
         reference{
             https://github.com/DevoLearn/devolearn#segmenting-the-c-elegans-embryo
         }
@@ -153,6 +154,7 @@ class embryo_segmentor():
             centroid_mode set to False:
                 list : list containing the names of the entries in the save_folder directory 
         """
+        
         vidObj = cv2.VideoCapture(video_path)   
         success = 1
         images = deque()
