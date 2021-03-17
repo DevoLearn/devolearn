@@ -8,6 +8,7 @@ from torchvision.transforms import ToPILImage
 
 import os
 import cv2
+import imageio
 import wget
 import imutils
 from tqdm import tqdm, tqdm_notebook
@@ -18,7 +19,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import segmentation_models_pytorch as smp
 import warnings
-warnings.filterwarnings("ignore") 
+warnings.filterwarnings("ignore")
 
 """
 3d segmentation model for C elegans embryo
@@ -26,12 +27,12 @@ warnings.filterwarnings("ignore")
 
 def generate_centroid_image(thresh):
     """Used when centroid_mode is set to True
- 
+
     Args:
         thresh (np.array): 2d numpy array that is returned from the segmentation model
 
     Returns:
-        np.array : image containing the contours and their respective centroids 
+        np.array : image containing the contours and their respective centroids
         list : list of all centroids for the given image as [(x1,y1), (x2,y2)...]
     """
 
@@ -58,13 +59,13 @@ def generate_centroid_image(thresh):
 
 class embryo_segmentor():
     def __init__(self, device = "cpu"):
-        """Segments the c. elegans embryo from images/videos, 
+        """Segments the c. elegans embryo from images/videos,
         depends on segmentation-models-pytorch for the model backbone
 
         Args:
             device (str, optional): set to "cuda", runs operations on gpu and set to "cpu", runs operations on cpu. Defaults to "cpu".
         """
-        
+
         self.device = device
         self.ENCODER = 'resnet18'
         self.ENCODER_WEIGHTS = 'imagenet'
@@ -77,23 +78,23 @@ class embryo_segmentor():
         # print("at : ", os.path.dirname(__file__))
 
         self.model = smp.FPN(
-                encoder_name= self.ENCODER, 
-                encoder_weights= self.ENCODER_WEIGHTS, 
-                classes=len(self.CLASSES), 
+                encoder_name= self.ENCODER,
+                encoder_weights= self.ENCODER_WEIGHTS,
+                classes=len(self.CLASSES),
                 activation= self.ACTIVATION,
-                in_channels = self.in_channels 
+                in_channels = self.in_channels
             )
 
         try:
             # print("model already downloaded, loading model...")
-            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device) 
+            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device)
         except:
             print("model not found, downloading from:", self.model_url)
             if os.path.isdir(self.model_dir) == False:
                 os.mkdir(self.model_dir)
             filename = wget.download(self.model_url, out= self.model_dir)
             # print(filename)
-            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device) 
+            self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device)
 
         self.model.to(self.device)
         self.model.eval()
@@ -106,7 +107,7 @@ class embryo_segmentor():
 
 
     def predict(self, image_path, pred_size = (350,250), centroid_mode = False):
-        """Loads an image from image_path and converts it to grayscale, 
+        """Loads an image from image_path and converts it to grayscale,
         then passes it through the model and returns centroids of the segmented features.
         reference{
             https://github.com/DevoLearn/devolearn#segmenting-the-c-elegans-embryo
@@ -125,7 +126,7 @@ class embryo_segmentor():
                 list : list of centroids.
         """
 
-        im = cv2.imread(image_path,0)
+        im = imageio.imread(image_path,0)
         tensor = self.mini_transform(im).unsqueeze(0).to(self.device)
         res = self.model(tensor).detach().cpu().numpy()[0][0]
         res = cv2.resize(res,pred_size)
@@ -134,12 +135,12 @@ class embryo_segmentor():
         else:
             centroid_image, centroids = generate_centroid_image(res)
             return centroid_image, centroids
-            
+
 
     def predict_from_video(self, video_path, pred_size = (350,250), save_folder = "preds", centroid_mode = False, notebook_mode = False):
-        """Splits a video from video_path into frames and passes the 
+        """Splits a video from video_path into frames and passes the
         frames through the model for predictions. Saves predicted images in save_folder.
-        And optionally saves all the centroid predictions into a pandas.DataFrame. 
+        And optionally saves all the centroid predictions into a pandas.DataFrame.
 
         Args:
             video_path (str): path to the video file.
@@ -152,10 +153,10 @@ class embryo_segmentor():
             centroid_mode set to True:
                 pd.DataFrame : containing file name and their centriods
             centroid_mode set to False:
-                list : list containing the names of the entries in the save_folder directory 
+                list : list containing the names of the entries in the save_folder directory
         """
-        
-        vidObj = cv2.VideoCapture(video_path)   
+
+        vidObj = cv2.VideoCapture(video_path)
         success = 1
         images = deque()
         count = 0
@@ -163,22 +164,22 @@ class embryo_segmentor():
         if centroid_mode == True:
             filenames_centroids = []
 
-        while success: 
-            success, image = vidObj.read() 
-            
+        while success:
+            success, image = vidObj.read()
+
             try:
                 image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
                 images.append(image)
-                 
+
             except:
                 print("skipped possible corrupt frame number : ", count)
-            count += 1 
-        
+            count += 1
+
         if os.path.isdir(save_folder) == False:
             os.mkdir(save_folder)
 
         if notebook_mode == True:
-            for i in tqdm_notebook(range(len(images)), desc = "saving predictions: "):    
+            for i in tqdm_notebook(range(len(images)), desc = "saving predictions: "):
                 save_name = save_folder + "/" + str(i) + ".jpg"
                 tensor = self.mini_transform(images[i]).unsqueeze(0).to(self.device)
                 res = self.model(tensor).detach().cpu().numpy()[0][0]
@@ -188,7 +189,7 @@ class embryo_segmentor():
                     filenames_centroids.append([save_name, centroids])
 
                 res = cv2.resize(res,pred_size)
-                cv2.imwrite(save_name, res*255)
+                imageio.imwrite(save_name, res*255)
         else :
             for i in tqdm(range(len(images)), desc = "saving predictions: "):
                 save_name = save_folder + "/" + str(i) + ".jpg"
@@ -200,7 +201,7 @@ class embryo_segmentor():
                     filenames_centroids.append([save_name, centroids])
 
                 res = cv2.resize(res,pred_size)
-                cv2.imwrite(save_name, res*255)
+                imageio.imwrite(save_name, res*255)
 
         if centroid_mode == True:
             df = pd.DataFrame(filenames_centroids, columns = ["filenames", "centroids"])
