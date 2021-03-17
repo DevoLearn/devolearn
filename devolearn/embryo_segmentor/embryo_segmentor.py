@@ -126,7 +126,7 @@ class embryo_segmentor():
                 list : list of centroids.
         """
 
-        im = imageio.imread(image_path,0)
+        im = cv2.imread(image_path,0)
         tensor = self.mini_transform(im).unsqueeze(0).to(self.device)
         res = self.model(tensor).detach().cpu().numpy()[0][0]
         res = cv2.resize(res,pred_size)
