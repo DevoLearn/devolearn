@@ -29,7 +29,7 @@ threadpoolctl==2.1.0
 tifffile
 timm==0.3.2
 torch>=1.7.0
-torchvision>=1.8.0
+torchvision>=0.8.1
 tqdm==4.56.0
 typing-extensions==3.7.4.3
 wget==3.2
