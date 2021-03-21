@@ -20,6 +20,8 @@ import segmentation_models_pytorch as smp
 import warnings
 warnings.filterwarnings("ignore") 
 
+from ..base_inference_engine import InferenceEngine
+
 """
 3d segmentation model for C elegans embryo
 """
