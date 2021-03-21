@@ -111,7 +111,7 @@ from devolearn import lineage_population_model
 
 * Loading a model instance to be used to estimate lineage populations of embryos from videos/photos.
 ```python
-model = lineage_population_model(mode = "cpu")
+model = lineage_population_model(device = "cpu")
 ```
 
 * Making a prediction from an image
