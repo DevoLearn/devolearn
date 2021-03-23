@@ -20,6 +20,8 @@ import segmentation_models_pytorch as smp
 import warnings
 warnings.filterwarnings("ignore") 
 
+from ..base_inference_engine import InferenceEngine
+
 """
 3d segmentation model for C elegans embryo
 """
@@ -56,7 +58,7 @@ def generate_centroid_image(thresh):
 
     return centroid_image, centroids
 
-class embryo_segmentor():
+class embryo_segmentor(InferenceEngine):
     def __init__(self, device = "cpu"):
         """Segments the c. elegans embryo from images/videos, 
         depends on segmentation-models-pytorch for the model backbone

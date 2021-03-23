@@ -17,13 +17,13 @@ import pandas as pd
 from tqdm import tqdm, tqdm_notebook
 import matplotlib.pyplot as plt
 
-
+from ..base_inference_engine import InferenceEngine
 
 """
 ResNet18 to determine population of cells in an embryo
 """
 
-class lineage_population_model():   
+class lineage_population_model(InferenceEngine):   
     def __init__(self, device = "cpu"):
         """Estimate lineage populations of C. elegans embroys from videos/photos and plotting predictions.
 

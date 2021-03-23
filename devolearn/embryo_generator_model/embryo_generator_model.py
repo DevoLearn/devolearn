@@ -18,7 +18,7 @@ from collections import deque
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
+from ..base_inference_engine import InferenceEngine
 
 
 """
@@ -70,7 +70,7 @@ class Generator(nn.Module):
         return self.main(input)
 
 
-class embryo_generator_model():   
+class embryo_generator_model(InferenceEngine):   
     def __init__(self, device = "cpu"):
         """Generate synthetic single or multiple images of embryos.
         Do not tweak these unless you're changing the Generator() with a new model with a different architecture. 
