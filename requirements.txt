@@ -33,3 +33,4 @@ torchvision>=0.8.1
 tqdm==4.56.0
 typing-extensions==3.7.4.3
 wget==3.2
+decord==0.5.2
