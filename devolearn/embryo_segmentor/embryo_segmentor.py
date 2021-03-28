@@ -165,7 +165,7 @@ class embryo_segmentor(InferenceEngine):
         #image_list = np.arange(len(vidObj))
         #frames = vidObj.get_batch(image_list)
         #success = 1
-        print(vidObj[0].shape)
+        #print(vidObj[0].shape)
         images = deque()
         count = 0
 
