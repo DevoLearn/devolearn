@@ -165,7 +165,7 @@ class embryo_segmentor(InferenceEngine):
         #image_list = np.arange(len(vidObj))
         #frames = vidObj.get_batch(image_list)
         #success = 1
-        #print('native output:', vidObj[0], vidObj[0].shape)
+        print(vidObj[0].shape)
         images = deque()
         count = 0
 
@@ -176,7 +176,7 @@ class embryo_segmentor(InferenceEngine):
             #success, image = vidObj.read()
 
             try:
-                images.append(cv2.cvtColor(np.float32(vidObj[i].asnumpy()), cv2.COLOR_RGB2GRAY))
+                images.append(cv2.cvtColor(vidObj[i].asnumpy(), cv2.COLOR_BGR2GRAY))
 
             except:
                 print("skipped possible corrupt frame number : ", count)
