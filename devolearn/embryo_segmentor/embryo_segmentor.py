@@ -7,7 +7,6 @@ from torchvision.transforms import ToTensor
 from torchvision.transforms import ToPILImage
 
 import os
-#import kornia
 import imageio
 import decord
 import cv2
@@ -39,8 +38,6 @@ def generate_centroid_image(thresh):
         np.array : image containing the contours and their respective centroids
         list : list of all centroids for the given image as [(x1,y1), (x2,y2)...]
     """
-    #thresh = torch.tensor(thresh)
-    #thresh = kornia.filters.box_blur(thresh, (5,5))
     thresh = cv2.blur(thresh, (5,5))
     thresh = thresh.astype(np.uint8)
     centroid_image = np.zeros(thresh.shape)
@@ -162,10 +159,6 @@ class embryo_segmentor(InferenceEngine):
         """
 
         vidObj = decord.VideoReader(video_path)
-        #image_list = np.arange(len(vidObj))
-        #frames = vidObj.get_batch(image_list)
-        #success = 1
-        #print(vidObj[0].shape)
         images = deque()
         count = 0
 
@@ -173,10 +166,9 @@ class embryo_segmentor(InferenceEngine):
             filenames_centroids = []
 
         for i in range(len(vidObj)):
-            #success, image = vidObj.read()
 
             try:
-                images.append(cv2.cvtColor(vidObj[i].asnumpy(), cv2.COLOR_BGR2GRAY))
+                images.append(cv2.cvtColor(vidObj[i].asnumpy(), cv2.COLOR_RGB2GRAY))
 
             except:
                 print("skipped possible corrupt frame number : ", count)
