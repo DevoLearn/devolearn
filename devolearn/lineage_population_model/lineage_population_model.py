@@ -8,6 +8,8 @@ import torchvision.models as models
 
 import os
 import cv2
+import imageio
+import decord
 import wget
 from PIL import Image
 import joblib
@@ -23,7 +25,7 @@ from ..base_inference_engine import InferenceEngine
 ResNet18 to determine population of cells in an embryo
 """
 
-class lineage_population_model(InferenceEngine):   
+class lineage_population_model(InferenceEngine):
     def __init__(self, device = "cpu"):
         """Estimate lineage populations of C. elegans embroys from videos/photos and plotting predictions.
 
@@ -61,8 +63,8 @@ class lineage_population_model(InferenceEngine):
                                             ])
 
     def predict(self, image_path):
-        """Loads an image from image_path and converts it to grayscale, 
-        then passes it though the model and returns a dictionary 
+        """Loads an image from image_path and converts it to grayscale,
+        then passes it though the model and returns a dictionary
         with the scaled output (see self.scaler)
 
         reference{
@@ -75,8 +77,13 @@ class lineage_population_model(InferenceEngine):
         Returns:
             dict: dictionary containing the cell population values
         """
-        image = cv2.imread(image_path, 0)
-        image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+        image = imageio.imread(image_path)
+        try:
+            image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+        except:
+            image = cv2.cvtColor(image, cv2.COLOR_RGBA2GRAY)
+            image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+
         tensor = self.transforms(image).unsqueeze(0).to(self.device)
         pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
 
@@ -95,12 +102,12 @@ class lineage_population_model(InferenceEngine):
         return pred_dict
 
     def predict_from_video(self, video_path, csv_name  = "foo.csv", save_csv = False, ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False):
-        """Splits a video from video_path into frames and passes the 
+        """Splits a video from video_path into frames and passes the
         frames through the model for predictions. Saves all the predictions
         into a pandas.DataFrame which can be optionally saved as a CSV file.
 
-        The model was trained to make predictions upto the 
-        stage where the population of "A" lineage is 250        
+        The model was trained to make predictions upto the
+        stage where the population of "A" lineage is 250
 
         Args:
             video_path (str): path to video file
@@ -115,25 +122,23 @@ class lineage_population_model(InferenceEngine):
         """
         A_population_upper_limit = 250
 
-        vidObj = cv2.VideoCapture(video_path)   
-        success = 1
+        vidObj = decord.VideoReader(video_path)
         images = deque()
         count = 0
 
         preds = deque()
 
-        while success: 
-            success, image = vidObj.read() 
-            
+        for i in range(len(vidObj)):
+
             try:
-                image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+                image = cv2.cvtColor(vidObj[i].asnumpy(), cv2.COLOR_RGB2GRAY)
                 image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
                 images.append(image)
-                
+
             except:
                 print("skipped possible corrupt frame number : ", count)
-            count += 1 
-        
+            count += 1
+
         if notebook_mode == True:
             for i in tqdm_notebook(range(len(images)), desc='Predicting from video file:  :'):
                 tensor = self.transforms(images[i]).unsqueeze(0).to(self.device)
@@ -147,8 +152,8 @@ class lineage_population_model(InferenceEngine):
                 pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
                 preds.append(pred_scaled)
 
-       
-        df = pd.DataFrame(preds, columns = ["A", "E", "M", "P", "C", "D", "Z"]) 
+
+        df = pd.DataFrame(preds, columns = ["A", "E", "M", "P", "C", "D", "Z"])
 
         if ignore_first_n_frames != 0:
             df= df.tail(df.shape[0] - ignore_first_n_frames)
@@ -159,10 +164,10 @@ class lineage_population_model(InferenceEngine):
 
         a_values = df["A"].values
 
-        for limit in range(len(a_values)):  ## show preds upto 250 A cells 
+        for limit in range(len(a_values)):  ## show preds upto 250 A cells
             if a_values[limit]>=250:
                 break
-        
+
         df = df.head(limit)
 
         if save_csv == True:
@@ -171,9 +176,9 @@ class lineage_population_model(InferenceEngine):
         return  df
 
 
-        
+
     def create_population_plot_from_video(self, video_path, save_plot = False, plot_name = "plot.png", ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False):
-        """Plots all the predictions from a video into a matplotlib.pyplot 
+        """Plots all the predictions from a video into a matplotlib.pyplot
 
         Args:
             video_path ([type]): path to video file
@@ -186,8 +191,8 @@ class lineage_population_model(InferenceEngine):
         Returns:
              matplotlib.pyplot : plot object which can be customized further
         """
-        df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames, notebook_mode = notebook_mode)  
-        
+        df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames, notebook_mode = notebook_mode)
+
         labels = ["A", "E", "M", "P", "C", "D", "Z"]
 
         for label in labels:
@@ -198,7 +203,7 @@ class lineage_population_model(InferenceEngine):
 
         if save_plot == True:
             plt.legend()
-            
+
             plt.savefig(plot_name)
 
         return plt
