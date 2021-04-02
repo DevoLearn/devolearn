@@ -17,7 +17,8 @@
 * [Generating synthetic images of embryos with a GAN](https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
 * [Predicting populations of cells within the C. elegans embryo](https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo)
 * [Contributing to DevoLearn](https://github.com/DevoLearn/devolearn/blob/master/.github/contributing.md#contributing-to-devolearn)
-* [Contact us](https://github.com/DevoLearn/devolearn#contact-us)
+* [Links to datasets](https://github.com/DevoLearn/devolearn#links-to-datasets)
+* [Contact us](https://github.com/DevoLearn/devolearn#authorsmaintainers)
 
 
 ### Installation
