@@ -94,7 +94,15 @@ class lineage_population_model(InferenceEngine):
 
         return pred_dict
 
-    def predict_from_video(self, video_path, csv_name  = "foo.csv", save_csv = False, ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False):
+    def postprocess_preds(self, preds):
+        for i in range(1, len(preds)):
+            for j in range(0, len(preds[0])):
+                if preds[i][j]<=preds[i-1][j]:
+                    preds[i][j]=preds[i-1][j]  
+
+        return(preds)
+
+    def predict_from_video(self, video_path, csv_name  = "foo.csv", save_csv = False, ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False, postprocess=False):
         """Splits a video from video_path into frames and passes the 
         frames through the model for predictions. Saves all the predictions
         into a pandas.DataFrame which can be optionally saved as a CSV file.
@@ -147,6 +155,8 @@ class lineage_population_model(InferenceEngine):
                 pred_scaled = (self.scaler.inverse_transform(pred).flatten()).astype(np.uint8)
                 preds.append(pred_scaled)
 
+        if postprocess:    
+            preds=self.postprocess_preds(preds)
        
         df = pd.DataFrame(preds, columns = ["A", "E", "M", "P", "C", "D", "Z"]) 
 
@@ -172,7 +182,7 @@ class lineage_population_model(InferenceEngine):
 
 
         
-    def create_population_plot_from_video(self, video_path, save_plot = False, plot_name = "plot.png", ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False):
+    def create_population_plot_from_video(self, video_path, save_plot = False, plot_name = "plot.png", ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False, postprocess=False):
         """Plots all the predictions from a video into a matplotlib.pyplot 
 
         Args:
@@ -186,7 +196,7 @@ class lineage_population_model(InferenceEngine):
         Returns:
              matplotlib.pyplot : plot object which can be customized further
         """
-        df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames, notebook_mode = notebook_mode)  
+        df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames, notebook_mode = notebook_mode, postprocess=postprocess)  
         
         labels = ["A", "E", "M", "P", "C", "D", "Z"]
 
