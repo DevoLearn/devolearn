@@ -95,6 +95,10 @@ class lineage_population_model(InferenceEngine):
         return pred_dict
 
     def postprocess_preds(self, preds):
+        """
+        Args:
+            preds (numpy.ndarray): array that needs to be postprocessed.
+        """
         for i in range(1, len(preds)):
             for j in range(0, len(preds[0])):
                 if preds[i][j]<=preds[i-1][j]:
@@ -102,7 +106,7 @@ class lineage_population_model(InferenceEngine):
 
         return(preds)
 
-    def predict_from_video(self, video_path, csv_name  = "foo.csv", save_csv = False, ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False, postprocess=False):
+    def predict_from_video(self, video_path, csv_name  = "foo.csv", save_csv = False, ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False, postprocess = False):
         """Splits a video from video_path into frames and passes the 
         frames through the model for predictions. Saves all the predictions
         into a pandas.DataFrame which can be optionally saved as a CSV file.
@@ -117,6 +121,7 @@ class lineage_population_model(InferenceEngine):
             ignore_first_n_frames (int, optional): number of frames to drop in the start of the video. Defaults to 0.
             ignore_last_n_frames (int, optional): number of frames to drop in the end of the video. Defaults to 0.
             notebook_mode (bool, optional): toogle between script(False) and notebook(True), for better user interface. Defaults to False.
+            postprocess (bool, optional): set to True if you want outputs from the model to be postprocessed. Defaults to False.
 
         Returns:
             pandas.DataFrame : DataFrame containing all the preds with the corresponding column name
@@ -182,7 +187,7 @@ class lineage_population_model(InferenceEngine):
 
 
         
-    def create_population_plot_from_video(self, video_path, save_plot = False, plot_name = "plot.png", ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False, postprocess=False):
+    def create_population_plot_from_video(self, video_path, save_plot = False, plot_name = "plot.png", ignore_first_n_frames = 0, ignore_last_n_frames = 0, notebook_mode = False, postprocess = False):
         """Plots all the predictions from a video into a matplotlib.pyplot 
 
         Args:
@@ -192,11 +197,12 @@ class lineage_population_model(InferenceEngine):
             ignore_first_n_frames (int, optional): number of frames to drop in the start of the video. Defaults to 0.
             ignore_last_n_frames (int, optional): number of frames to drop in the end of the video. Defaults to 0.
             notebook_mode (bool, optional): toogle between script(False) and notebook(True), for better user interface. Defaults to False.
+            postprocess (bool, optional): set to True if you want outputs from the model to be postprocessed. Defaults to False.
 
         Returns:
              matplotlib.pyplot : plot object which can be customized further
         """
-        df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames, notebook_mode = notebook_mode, postprocess=postprocess)  
+        df = self.predict_from_video(video_path, ignore_first_n_frames = ignore_first_n_frames, ignore_last_n_frames = ignore_last_n_frames, notebook_mode = notebook_mode, postprocess = postprocess)  
         
         labels = ["A", "E", "M", "P", "C", "D", "Z"]
 
