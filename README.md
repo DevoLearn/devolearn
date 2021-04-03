@@ -122,12 +122,12 @@ print(model.predict(image_path = "sample_data/images/embryo_sample.png"))
 
 * Making predictions from a video and saving the predictions into a CSV file
 ```python
-results = model.predict_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_csv = True, csv_name = "video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10 )
+results = model.predict_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_csv = True, csv_name = "video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10, postprocess = False)
 ```
 
 * Plotting the model's predictions from a video
 ```python
-plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0 )
+plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0, postprocess = False)
 plot.show()
 ```
 
