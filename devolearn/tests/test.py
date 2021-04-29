@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
 import os
+import pytest
 
 import warnings
 warnings.filterwarnings("ignore") 
@@ -17,6 +18,7 @@ import os
 
 class test(unittest.TestCase):
 
+    @pytest.mark.lineage_population_model
     def test_lineage_population_model(self):
         test_dir = os.path.dirname(__file__)
 
@@ -29,7 +31,8 @@ class test(unittest.TestCase):
 
         plot = model.create_population_plot_from_video(video_path = test_dir + "/" + "sample_data/videos/embryo_timelapse.mov", save_plot= False, plot_name= "sample_preds/plot.png", ignore_last_n_frames= 0 )
         self.assertTrue(isinstance(plot, type(plt)), "should be matplotlib.pyplot")
-        
+
+    @pytest.mark.embryo_generator_model   
     def test_embryo_generator_model(self):
         test_dir = os.path.dirname(__file__)
 
@@ -37,7 +40,8 @@ class test(unittest.TestCase):
         gen_image = generator.generate()  ## 2d numpy array 
         self.assertTrue(isinstance(gen_image, np.ndarray), "should be dict")
         self.assertTrue(isinstance(generator.generate_n_images(n = 1, foldername= test_dir + "/" + "generated_images", image_size= (700,500)), type(None)), "should return None without errors")
- 
+
+    @pytest.mark.embryo_segmentor
     def test_embryo_segmentor(self):
         test_dir = os.path.dirname(__file__)
 
@@ -54,7 +58,6 @@ class test(unittest.TestCase):
 
         centroid_df = segmentor.predict_from_video(video_path = test_dir + "/" +  "sample_data/videos/seg_sample.mov", centroid_mode = True, save_folder = test_dir + "/" + "preds")
         self.assertTrue(isinstance(centroid_df, pd.DataFrame), "should be a pandas.DataFrame")
-
 
 if __name__ == '__main__':
 
