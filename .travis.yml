@@ -9,5 +9,6 @@ dist: bionic
 install: 
   - pip install .
   - pip install -r requirements.txt
+  - pip install pytest
 script:  
-  - python setup.py test 
+  - pytest devolearn/tests/test.py
