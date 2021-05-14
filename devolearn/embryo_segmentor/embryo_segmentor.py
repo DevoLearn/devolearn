@@ -86,6 +86,19 @@ class embryo_segmentor(InferenceEngine):
                 in_channels = self.in_channels 
             )
 
+
+        self.download_checkpoint()
+        self.model.to(self.device)
+        self.model.eval()
+
+        self.mini_transform = transforms.Compose([
+                                     transforms.ToPILImage(),
+                                     transforms.Resize((256,256), interpolation = Image.NEAREST),
+                                     transforms.ToTensor(),
+                                    ])
+
+
+    def download_checkpoint(self):
         try:
             # print("model already downloaded, loading model...")
             self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device) 
@@ -96,15 +109,6 @@ class embryo_segmentor(InferenceEngine):
             filename = wget.download(self.model_url, out= self.model_dir)
             # print(filename)
             self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device) 
-
-        self.model.to(self.device)
-        self.model.eval()
-
-        self.mini_transform = transforms.Compose([
-                                     transforms.ToPILImage(),
-                                     transforms.Resize((256,256), interpolation = Image.NEAREST),
-                                     transforms.ToTensor(),
-                                    ])
 
 
     def predict(self, image_path, pred_size = (350,250), centroid_mode = False):
