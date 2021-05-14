@@ -110,6 +110,10 @@ class embryo_segmentor(InferenceEngine):
             # print(filename)
             self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device) 
 
+    def preprocess(self, image_grayscale_numpy):
+
+        tensor = self.mini_transform(image_grayscale_numpy).unsqueeze(0).to(self.device)
+        return tensor
 
     def predict(self, image_path, pred_size = (350,250), centroid_mode = False):
         """Loads an image from image_path and converts it to grayscale, 
@@ -132,8 +136,10 @@ class embryo_segmentor(InferenceEngine):
         """
 
         im = cv2.imread(image_path,0)
-        tensor = self.mini_transform(im).unsqueeze(0).to(self.device)
+
+        tensor = self.preprocess(im)
         res = self.model(tensor).detach().cpu().numpy()[0][0]
+        
         res = cv2.resize(res,pred_size)
         if centroid_mode == False:
             return res
@@ -177,7 +183,8 @@ class embryo_segmentor(InferenceEngine):
                 images.append(image)
                  
             except:
-                print("skipped possible corrupt frame number : ", count)
+                # print("skipped possible corrupt frame number : ", count)
+                pass
             count += 1 
         
         if os.path.isdir(save_folder) == False:
