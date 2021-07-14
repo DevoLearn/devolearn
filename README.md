@@ -40,8 +40,8 @@ pip install devolearn
 
 * Importing the model
 ```python
-from devolearn import embryo_segmentor
-segmentor = embryo_segmentor()
+from devolearn import cell_membrane_segmentor
+segmentor = cell_membrane_segmentor()
 
 ```
 
