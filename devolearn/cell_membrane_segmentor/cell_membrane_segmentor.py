@@ -58,7 +58,7 @@ def generate_centroid_image(thresh):
 
     return centroid_image, centroids
 
-class embryo_segmentor(InferenceEngine):
+class cell_membrane_segmentor(InferenceEngine):
     def __init__(self, device = "cpu"):
         """Segments the c. elegans embryo from images/videos, 
         depends on segmentation-models-pytorch for the model backbone
@@ -73,8 +73,8 @@ class embryo_segmentor(InferenceEngine):
         self.CLASSES = ["nucleus"]
         self.ACTIVATION = 'sigmoid'
         self.in_channels = 1
-        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/embryo_segmentor/3d_segmentation_model.pth"
-        self.model_name = "3d_segmentation_model.pth"
+        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/cell_membrane_segmentor/cell_membrane_segmentation_model.pth"
+        self.model_name = "cell_membrane_segmentation_model.pth"
         self.model_dir = os.path.dirname(__file__)
         # print("at : ", os.path.dirname(__file__))
 

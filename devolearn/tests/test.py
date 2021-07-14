@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore")
 
 from devolearn import lineage_population_model
 from devolearn import Generator, embryo_generator_model
-from devolearn import embryo_segmentor
+from devolearn import cell_membrane_segmentor
 
 import os
 
@@ -41,11 +41,11 @@ class test(unittest.TestCase):
         self.assertTrue(isinstance(gen_image, np.ndarray), "should be dict")
         self.assertTrue(isinstance(generator.generate_n_images(n = 1, foldername= test_dir + "/" + "generated_images", image_size= (700,500)), type(None)), "should return None without errors")
 
-    @pytest.mark.embryo_segmentor
-    def test_embryo_segmentor(self):
+    @pytest.mark.cell_membrane_segmentor
+    def test_cell_membrane_segmentor(self):
         test_dir = os.path.dirname(__file__)
 
-        segmentor = embryo_segmentor()
+        segmentor = cell_membrane_segmentor()
         seg_pred = segmentor.predict(image_path = test_dir + "/" + "sample_data/images/seg_sample.jpg", centroid_mode =False )
         self.assertTrue(isinstance(seg_pred, np.ndarray), "should be numpy.ndarray")
 
