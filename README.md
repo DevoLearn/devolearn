@@ -33,7 +33,7 @@ pip install devolearn
 
 * [Extracting centroid maps and making 3d centroid models](https://nbviewer.jupyter.org/github/DevoLearn/data-science-demos/blob/master/Networks/experiments_with_devolearn_node_maps.ipynb)
 
-### Segmenting the C. elegans embryo 
+### Segmenting the Cell Membrane in C. elegans embryo 
 <p align="center">
 <img src = "https://raw.githubusercontent.com/DevoLearn/devolearn/master/images/pred_centroids.gif" width = "80%">
 </p>
@@ -69,6 +69,25 @@ plt.show()
 ```python
 df = segmentor.predict_from_video(video_path = "sample_data/videos/seg_sample.mov", centroid_mode = True, save_folder = "preds")
 df.to_csv("centroids.csv")
+```
+
+### Segmenting the Cell Nucleus in C. elegans embryo 
+<p align="center">
+<img src = "https://github.com/Mainakdeb/devolearn/blob/master/images/nucleus_segmentation.gif" width = "60%">
+</p>
+
+* Importing the model
+```python
+from devolearn import cell_nucleus_segmentor
+segmentor = cell_nucleus_segmentor()
+
+```
+
+* Running the model on an image and viewing the prediction
+```python
+seg_pred = segmentor.predict(image_path = "sample_data/images/nucleus_seg_sample.jpg")
+plt.imshow(seg_pred)
+plt.show()
 ```
 
 ### Generating synthetic images of embryos with a Pre-trained GAN
