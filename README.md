@@ -153,7 +153,8 @@ plot.show()
 ## Links to Datasets
 | **Model**                                       | **Data source**                                                                                                                                                   |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Segmenting the C. elegans embryo                | [3DMMS: robust 3D Membrane Morphological Segmentation of C. elegans embryo](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/) |
+| Segmenting the cell membrane in C. elegans embryo                | [3DMMS: robust 3D Membrane Morphological Segmentation of C. elegans embryo](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/) |
+| Segmenting the nucleus in C. elegans embryo    | [C. elegans Cell-Tracking-Challenge dataset](http://celltrackingchallenge.net/3d-datasets/)                                                           
 | Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)                                                                                    
 
 ## Authors/maintainers:
