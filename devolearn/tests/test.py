@@ -12,8 +12,11 @@ warnings.filterwarnings("ignore")
 from devolearn import lineage_population_model
 from devolearn import Generator, embryo_generator_model
 from devolearn import cell_membrane_segmentor
+from devolearn import cell_nucleus_segmentor
+
 
 import os
+import cv2
 
 
 class test(unittest.TestCase):
@@ -58,6 +61,16 @@ class test(unittest.TestCase):
 
         centroid_df = segmentor.predict_from_video(video_path = test_dir + "/" +  "sample_data/videos/seg_sample.mov", centroid_mode = True, save_folder = test_dir + "/" + "preds")
         self.assertTrue(isinstance(centroid_df, pd.DataFrame), "should be a pandas.DataFrame")
+
+    @pytest.mark.cell_nucleus_segmentor
+    def test_cell_nucleus_segmentor(self):
+        test_dir = os.path.dirname(__file__)
+
+        segmentor = cell_nucleus_segmentor()
+        seg_pred = segmentor.predict(image_path = test_dir + "/" + "sample_data/images/nucleus_seg_sample.png")
+
+        #cv2.imwrite(test_dir+"/generated_images/nucleus_seg_inference.png", seg_pred*255)
+        self.assertTrue(isinstance(seg_pred, np.ndarray), "should be numpy.ndarray")
 
 if __name__ == '__main__':
 
