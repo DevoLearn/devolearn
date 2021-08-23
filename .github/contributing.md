@@ -9,8 +9,8 @@ The following is a set of guidelines for contributing to DevoLearn and its packa
 [I don't want to read this whole thing, I just have a question!](#i-dont-want-to-read-this-whole-thing-i-just-have-a-question)
 
 [What should I know before I get started?](#what-should-i-know-before-i-get-started)
-  * [What do DevoLearn models do ?](#what-do-the-devolearn-models-do-)
-  * [How can I add my own model to DevoLearn ?](#how-can-i-add-my-own-model-to-devolearn-)
+  * [What do DevoLearn models do ?](#what-do-devolearn-models-do)
+  * [How can I add my own model to DevoLearn ?](#how-can-i-add-my-own-model-to-devolearn)
   * [Making a code contribution](#making-a-code-contribution)
 
 [Suggesting a model](#suggesting-a-model)
