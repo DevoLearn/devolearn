@@ -24,4 +24,13 @@ jobs:
 
       - name: Run pytest
         run: pytest devolearn/tests/test.py
-     
+
+      - name: Generate Report
+        run: |
+          pip install coverage
+          coverage run -m pytest devolearn/tests/test.py
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
