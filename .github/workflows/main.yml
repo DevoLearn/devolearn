@@ -21,14 +21,10 @@ jobs:
           pip install .
           pip install -r requirements.txt
           pip install pytest
+          pip install pytest-cov
 
-      - name: Run pytest
-        run: pytest devolearn/tests/test.py
-
-      - name: Generate Report
-        run: |
-          pip install coverage
-          coverage run -m pytest devolearn/tests/test.py
+      - name: Run tests
+        run: pytest devolearn/tests/test.py --cov=devolearn --cov-report=xml
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v1
