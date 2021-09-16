@@ -3,6 +3,7 @@
 </p>
 
 ![Build Status](https://github.com/DevoLearn/devolearn/actions/workflows/main.yml/badge.svg)
+[![codecov](https://codecov.io/gh/DevoLearn/devolearn/branch/master/graph/badge.svg?token=F8AJZSGWXJ)](https://codecov.io/gh/DevoLearn/devolearn)
 [![](https://img.shields.io/github/issues/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/issues)
 [![](https://img.shields.io/github/contributors/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/graphs/contributors)
 [![](https://img.shields.io/github/last-commit/DevoLearn/devolearn)](https://github.com/DevoLearn/devolearn/commits/master)
