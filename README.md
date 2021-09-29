@@ -10,6 +10,9 @@
 [![](https://img.shields.io/twitter/url?color=green&label=Slack&logo=slack&logoColor=blue&style=social&url=https%3A%2F%2Fopenworm.slack.com%2Farchives%2FCMVFU7Q4W)](https://openworm.slack.com/archives/CMVFU7Q4W)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/DevoLearn/data-science-demos/blob/master/devolearn_docs/devolearn_quickstart.ipynb)
 
+Address an [issue](https://github.com/devoworm/Digital-Bacillaria/issues) or attend a [group meeting](https://devoworm.weebly.com/schedulejoin.html), Contribute to Hacktoberfest 2021!   
+
+<IMG width="200" height="50" SRC = "https://github.com/devoworm/Digital-Bacillaria/blob/master/Hacktoberfest/hf_logo.png">
 
 ## Contents
 
