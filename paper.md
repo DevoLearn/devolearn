@@ -9,11 +9,11 @@ TBA
 ## Summary
 Extracting metadata from microscopic videos/images have been one of the key steps in the process of finding emerging patterns from various biological processes. There have been many attempts to develop segmentation tools for cell shape and location (Cao, 2019a; Cao, 2019b; Chen, 2013). In particular, cell tracking methodologies provide quantitative summaries of cell centroid positions within an embryo (Ulman, 2006). Our pre-trained models (Devolearn) aim to speed up this process of collecting metadata by using robust deep learning models that can be used through a high level API. Devolearn’s primary focus is the _Caenorhabditis elegans_ embryo and specifically on the early embryogenesis process. This builds upon desired functionality that was first proposed by the DevoWorm group in (Alicea, 2019). Below are some of the capabilities of the DevoLearn model.
 
-* **Segments images/videos of the _C. elegans_ embryo and extract the centroids of the cells and save them into a CSV file.  
+* Segments images/videos of the _C. elegans_ embryo and extract the centroids of the cells and save them into a CSV file.  
 
-* **Estimating the population of cells of various lineages within the _C. elegans_ embryo and upon user request generates plots of the data.  
+* Estimating the population of cells of various lineages within the _C. elegans_ embryo and upon user request generates plots of the data.  
 
-* **Generating images of the _C. elegans_ embryo with either a Generative Adversarial Network (GAN) or Feature Pyramid Network (FPN) using a ResNet-18 backbone.  
+* Generating images of the _C. elegans_ embryo with either a Generative Adversarial Network (GAN) or Feature Pyramid Network (FPN) using a ResNet-18 backbone.  
 
 DevoLearn has been made available as an open-source module, available on PyPI ([https://pypi.org/project/devolearn/](https://pypi.org/project/devolearn/)). All the deep-learning models used in devolearn are built and trained on PyTorch. The PyPI package itself does not contain the model weights, but the models are downloaded automatically once the user imports a certain model from the package. 
   
