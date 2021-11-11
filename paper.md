@@ -35,7 +35,7 @@ A training pipeline was built using data from the in order to enable Optuna tria
   
 Optuna is a hyperparameter optimization framework capable of automating the process of hyperparameter tuning. The range of our sampled hyperparameters were as follows: Learning rate: 0.5e-3 to 20e-3, Batch Size: 8 to 64. Each trial trained the model on 10% of available data for three epochs, and returned the resulting IOU score. The hyperparams from the best optuna trial is shown in Figure 3.
   
-![Training metrics for hyperparameter tuning, from left: IOU scores, Val Dice Loss, and Learning Rate] (https://github.com/DevoLearn/devolearn/blob/master/images/training_metrics.png).
+![Training metrics for hyperparameter tuning, from left: IOU scores, Val Dice Loss, and Learning Rate](https://github.com/DevoLearn/ devolearn/blob/master/images/training_metrics.png)    
 __Figure 3.__ Training metrics for hyperparameter tuning, from left: IOU scores, Val Dice Loss, and Learning Rate.
 
 ### Meta-feature Detection
@@ -46,7 +46,7 @@ Devolearn has been built to be very data science friendly and to be highly compa
 ## DevoLearn platform
 The DevoLearn PyPI package is a part of the DevoLearn Github organization (https://github.com/devolearn), which serves as a comprehensive open-source research and educational resource. This platform consists of a model library that has more general Machine Learning models for a wider range of model organisms, theory-building activities, and data science tutorials submitted by different contributors. It aims to provide users with Data Science tutorials, web-based applications that offer other Deep Learning and Machine Learning tools for cell segmentation, and other educational resources.  We invite new collaborators to join us on a continual basis in maintaining and expanding the capabilities of the DevoLearn organization.  
   
-![Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework](https://user-images.githubusercontent.com/19001437/101274845-03cf2b80-3767-11eb-9541-bc549f697dbb.png)
+![Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework](https://user-images.githubusercontent.com/19001437/101274845-03cf2b80-3767-11eb-9541-bc549f697dbb.png)     
 __Figure 4.__ Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework.  
   
 ## Future Directions  
