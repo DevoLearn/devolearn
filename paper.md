@@ -35,7 +35,8 @@ A training pipeline was built using data from the in order to enable Optuna tria
   
 Optuna is a hyperparameter optimization framework capable of automating the process of hyperparameter tuning. The range of our sampled hyperparameters were as follows: Learning rate: 0.5e-3 to 20e-3, Batch Size: 8 to 64. Each trial trained the model on 10% of available data for three epochs, and returned the resulting IOU score. The hyperparams from the best optuna trial is shown in Figure 3.
   
-![Training metrics for hyperparameter tuning, from left: IOU scores, Val Dice Loss, and Learning Rate](https://github.com/DevoLearn/ devolearn/blob/master/images/training_metrics.png)    
+![Training metrics for hyperparameter tuning, from left: IOU scores, Val Dice Loss, and Learning Rate]
+(https://github.com/DevoLearn/ devolearn/blob/master/images/training_metrics.png)    
 __Figure 3.__ Training metrics for hyperparameter tuning, from left: IOU scores, Val Dice Loss, and Learning Rate.
 
 ### Meta-feature Detection
