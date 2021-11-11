@@ -1,10 +1,10 @@
 # DevoLearn: Machine Learning Models and Education that Enable Computational Developmental Biology
-Mayukh Deb <SUP>1, 2</SUP>, Ujjwal Singh <SUP>1, 3</SUP>, Mainak Deb <SUP>1</SUP>,<SUP>2</SUP>, Bradly Alicea <SUP>1, 4</SUP><BR>
+Mayukh Deb <SUP>1, 2</SUP>, Ujjwal Singh <SUP>1, 3</SUP>, Mainak Deb <SUP>1</SUP>,<SUP>2</SUP>, Bradly Alicea <SUP>1, 4</SUP><BR>   
+
+<SUP>1</SUP>OpenWorm Foundation, <SUP>2</SUP>Amrita Vishwa Vidyapeetham University, <SUP>3</SUP>IIIT Delhi, <SUP>4</SUP>Orthogonal Research and Education Lab
 
 ## Abstract
 TBA 
-
-<SUP>1</SUP>OpenWorm Foundation, <SUP>2</SUP>Amrita Vishwa Vidyapeetham University, <SUP>3</SUP>IIIT Delhi, <SUP>4</SUP>Orthogonal Research and Education Lab
 
 ## Summary
 Extracting metadata from microscopic videos/images have been one of the key steps in the process of finding emerging patterns from various biological processes. There have been many attempts to develop segmentation tools for cell shape and location (Cao, 2019a; Cao, 2019b; Chen, 2013). In particular, cell tracking methodologies provide quantitative summaries of cell centroid positions within an embryo (Ulman, 2006). Our pre-trained models (Devolearn) aim to speed up this process of collecting metadata by using robust deep learning models that can be used through a high level API. Devolearn’s primary focus is the _Caenorhabditis elegans_ embryo and specifically on the early embryogenesis process. This builds upon desired functionality that was first proposed by the DevoWorm group in (Alicea, 2019). Below are some of the capabilities of the DevoLearn model.
@@ -16,13 +16,16 @@ Extracting metadata from microscopic videos/images have been one of the key step
 * Generating images of the _C. elegans_ embryo with either a Generative Adversarial Network (GAN) or Feature Pyramid Network (FPN) using a ResNet-18 backbone.  
 
 ![Example of Cell Membrane Segmentation using DevoLearn web interface.\label{fig:1}](https://github.com/DevoLearn/devolearn/blob/master/images/E9OLRIOVoAEbEbv.gif)  
-  
+Example of Cell Membrane Segmentation using DevoLearn web interface.   
+
+## Accessibility
 DevoLearn has been made available as an open-source module, available on PyPI ([https://pypi.org/project/devolearn/](https://pypi.org/project/devolearn/)) and as a Web app (https://devolearn.herokuapp.com). All the deep-learning models implemented in DevoLearn are built and trained on PyTorch. The PyPI package itself does not contain the model weights, but the models are downloaded automatically once the user imports a certain model from the package. 
   
 ## Statement of Need
 Devolearn (0.2.0) is a Python package that aims to automate the process of collecting metadata from videos/images of the _C. elegans_ embryo with the help of deep learning models \autoref{fig:2}. This would enable researchers/enthusiasts to analyse features from videos/images at scale without having to annotate their data manually. There are a number of pre-trained models which are already in use in different contexts, but options are fewer within the unique feature space of developmental biology, in particular. Devolearn aims not just to fix this issue, but also work on other aspects around developmental biology with species-specific models.  
 
 ![Schematic demonstrating the runtime procedure of the DevoLearn standalone program.\label{fig:2}](images/project_structure.jpg)
+Schematic demonstrating the runtime procedure of the DevoLearn standalone program.
 
 ## Technical Details  
 DevoLearn 0.2.0 is optimized to segment and analyze high-resolution microscopy images such as those acquired using light sheet microscopy. The deep learning models used for embryo segmentation and cell lineage population prediction were both based on the ResNet18 architecture. Data from the EPIC dataset (Murray, 2012) was used to train the GAN (beta) and the lineage wise cell population prediction model. The embryo segmentation model was trained on a dataset sourced from Cao (2019b). Data for the hyperparameter tuning training set was acquired from the Cell Tracking Challenge (http://celltrackingchallenge.net/).
@@ -33,19 +36,22 @@ A training pipeline was built using data from the in order to enable Optuna tria
 Optuna is a hyperparameter optimization framework capable of automating the process of hyperparameter tuning. The range of our sampled hyperparameters were as follows: Learning rate: 0.5e-3 to 20e-3, Batch Size: 8 to 64. Each trial trained the model on 10% of available data for three epochs, and returned the resulting IOU score. The hyperparams from the best optuna trial is shown in \autoref{fig.3}.
   
 ![Training metrics for hyperparameter tuning, from left: IOU scores, Val Dice Loss, and Learning Rate  \label{fig:3}](https://github.com/DevoLearn/devolearn/blob/master/images/training_metrics.png).
+Training metrics for hyperparameter tuning, from left: IOU scores, Val Dice Loss, and Learning Rate.
 
 ### Meta-feature Detection
 DevoLearn is also capable of extracting _meta-features_ that identify movement patterns and multicellular physics in the embryogenetic environment. Examples of this include embryo networks (Alicea and Gordon, 2018) and motion features. The former capability involves extracting potential structural and functional networks using distance metrics and other information extracted from microscopy images. Motion features can also be extracted and can be used for a variety of purposes, including as a means to build generative adversarial network (GAN) models (Goodfellow, 2014). Feature Pyramid Networks (FPNs) enable semantic feature maps (Lin et.al, 2016), which can also be used to approach the identity of anatomical and other biological features in new ways.
 
 Devolearn has been built to be very data science friendly and to be highly compatible with libraries like NumPy (Harris, 2020) and Pandas (Virtanen, 2020) As the Devolearn framework \autoref{fig:4} grows bigger with more tools and deep learning models, the combination of beginner friendliness and support for data science functionality will enable exciting scientific explorations both in developmental biology and data science.   
 
-![Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework.\label{fig:4}](https://user-images.githubusercontent.com/19001437/101274845-03cf2b80-3767-11eb-9541-bc549f697dbb.png)
-
-The DevoLearn PyPI package is a part of the DevoLearn Github organization (https://github.com/devolearn), which serves as a comprehensive open-source research and educational resource. It aims to provide users with Data Science tutorials, web-based applications that offer other Deep Learning and Machine Learning tools for cell segmentation, and other educational resources.  We invite new collaborators to join us on a continual basis in maintaining and expanding the capabilities of the DevoLearn organization.  
-
 ## DevoLearn platform
-The DevoLearn software is also hosted in a Github organization that serves as an educational platform. This platform consists of a model library that has more general Machine Learning models for a wider range of model organisms, theory-building activities, and data science tutorials submitted by different contributors. 
+The DevoLearn PyPI package is a part of the DevoLearn Github organization (https://github.com/devolearn), which serves as a comprehensive open-source research and educational resource. This platform consists of a model library that has more general Machine Learning models for a wider range of model organisms, theory-building activities, and data science tutorials submitted by different contributors. It aims to provide users with Data Science tutorials, web-based applications that offer other Deep Learning and Machine Learning tools for cell segmentation, and other educational resources.  We invite new collaborators to join us on a continual basis in maintaining and expanding the capabilities of the DevoLearn organization.  
   
+![Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework.\label{fig:4}](https://user-images.githubusercontent.com/19001437/101274845-03cf2b80-3767-11eb-9541-bc549f697dbb.png)
+Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework.  
+  
+## Future Directions  
+
+
 ## Acknowledgements
 We would like to thank the OpenWorm Foundation, the International Neuroinformatics Coordinating Facility (INCF), and Google Summer of Code for their financial and institutional support. Gratitude also goes to the DevoWorm group for their expertise and feedback. 
 
