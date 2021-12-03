@@ -1,5 +1,5 @@
 # DevoLearn: Machine Learning Models and Education that Enable Computational Developmental Biology
-Mayukh Deb <SUP>1, 2</SUP>, Ujjwal Singh <SUP>1, 3</SUP>, Mainak Deb <SUP>1</SUP>,<SUP>2</SUP>, Bradly Alicea <SUP>1, 4</SUP><BR>   
+Mayukh Deb <SUP>1,2</SUP>, Ujjwal Singh <SUP>1,3</SUP>, Mainak Deb <SUP>1,2</SUP>, Bradly Alicea <SUP>1 4</SUP><BR>   
 
 <SUP>1</SUP>OpenWorm Foundation, <SUP>2</SUP>Amrita Vishwa Vidyapeetham University, <SUP>3</SUP>IIIT Delhi, <SUP>4</SUP>Orthogonal Research and Education Lab
 
@@ -15,7 +15,7 @@ Extracting metadata from microscopic videos/images have been one of the key step
 
 * Generating images of the _C. elegans_ embryo with either a Generative Adversarial Network (GAN) or Feature Pyramid Network (FPN) using a ResNet-18 backbone.  
 
-![](https://github.com/DevoLearn/devolearn/blob/master/images/E9OLRIOVoAEbEbv.gif)  
+![](https://user-images.githubusercontent.com/19001437/144554648-2b6f4788-fd72-44d9-81f0-228f2d08bc78.gif)  
 __Figure 1.__ Example of Cell Membrane Segmentation using DevoLearn web interface.   
 
 ## Accessibility
@@ -24,18 +24,19 @@ DevoLearn has been made available as an open-source module, available on PyPI ([
 ## Statement of Need
 Devolearn (0.3.0) is a Python package that aims to automate the process of collecting metadata from videos/images of the _C. elegans_ embryo with the help of deep learning models (Figure 2). This would enable researchers/enthusiasts to analyse features from videos/images at scale without having to annotate their data manually. There are a number of pre-trained models which are already in use in different contexts, but options are fewer within the unique feature space of developmental biology, in particular. Devolearn aims not just to fix this issue, but also work on other aspects around developmental biology with species-specific models.  
 
-![](images/project_structure.jpg)
+![](https://user-images.githubusercontent.com/19001437/144554727-c465079a-2812-4637-8e0a-a339c0453791.jpg)
 __Figure 2.__ Schematic demonstrating the runtime procedure of the DevoLearn standalone program.
 
 ## Technical Details  
 DevoLearn 0.3.0 is optimized to segment and analyze high-resolution microscopy images such as those acquired using light sheet microscopy. The deep learning models used for embryo segmentation and cell lineage population prediction were both based on the ResNet18 architecture. Data from the EPIC dataset (Murray, 2012) was used to train the GAN (beta) and the lineage wise cell population prediction model. The embryo segmentation model was trained on a dataset sourced from Cao (2019b). Data for the hyperparameter tuning training set was acquired from the Cell Tracking Challenge (http://celltrackingchallenge.net/).
   
 ### Segmenting a _C. elegans_ embryo 
-<p align="center">
-<img src = "https://github.com/Mainakdeb/devolearn/blob/master/images/nucleus_segmentation.gif" width = "60%">
-</p>
+These code examples for importing image data, running the model in DevoLearn, and viewing the results are written in Python. Data can be extracted from video or from standalone microscopy images. Devolearn works best on florescence images or augmented/pre-masked high-resolution microscopy images. The output consists of segmented cell nuclei (Figure 3) with information about the non-normalized _x,y_ position of each identified cell centroid.
 
-These code examples for importing image data, running the model in DevoLearn, and viewing the results are written in Python. Data can be extracted from video or from standalone microscopy images. Devolearn works best on florescence images or augmented/pre-masked high-resolution microscopy images. The output consists of segmented cell nuclei with information about the non-normalized _x,y_ position of each identified cell centroid. In some cases, the nucleus is caught in the act of cell division, or is corrupted by an ambiguous boundary. This can happen for images taken at various focal planes near the dorsal and ventral surfaces of the embryo. In such cases, the user might adjust the threshold to compensate.
+![](https://user-images.githubusercontent.com/19001437/144554772-7c60baad-8f34-4e5e-9a87-610386c79a57.gif)
+__Figure 3.__ An example of nucleus segmentation in DevoLearn.
+
+In some cases, the nucleus is caught in the act of cell division, or is corrupted by an ambiguous boundary. This can happen for images taken at various focal planes near the dorsal and ventral surfaces of the embryo. In such cases, the user might adjust the threshold to compensate.
   
 #### Importing the model
 ```python
@@ -54,21 +55,21 @@ plt.show()
 ### Hyperparameter Optimization
 A training pipeline was built using data from the in order to enable Optuna trials. Training involved image augmentation, which were define using Albumentations. Gaussian noise was also added to the in training images in the augmentation step. During the Optuna trials, optimize the learning rate and batch size to maximize the IOU score. Ran 100 Optuna trials, a single epoch each, on 10% of available data.
   
-Optuna is a hyperparameter optimization framework capable of automating the process of hyperparameter tuning. The range of our sampled hyperparameters were as follows: Learning rate: 0.5e-3 to 20e-3, Batch Size: 8 to 64. Each trial trained the model on 10% of available data for three epochs, and returned the resulting IOU score. The hyperparams from the best optuna trial is shown in Figure 3.
+Optuna is a hyperparameter optimization framework capable of automating the process of hyperparameter tuning. The range of our sampled hyperparameters were as follows: Learning rate: 0.5e-3 to 20e-3, Batch Size: 8 to 64. Each trial trained the model on 10% of available data for three epochs, and returned the resulting IOU score. The hyperparams from the best optuna trial is shown in Figure 4.
   
-![](https://github.com/DevoLearn/devolearn/blob/master/images/training_metrics.png)    
-__Figure 3.__ Training metrics for hyperparameter tuning, from left: IOU scores, Validation (val_dice) Loss, and Learning Rate.
+![](https://user-images.githubusercontent.com/19001437/144554864-abd5c1ac-8ab6-4fcf-b4b3-a677ffaee608.png)    
+__Figure 4.__ Training metrics for hyperparameter tuning, from left: IOU scores, Validation (val_dice) Loss, and Learning Rate.
 
 ### Meta-feature Detection
 DevoLearn is also capable of extracting _meta-features_ that identify movement patterns and multicellular physics in the embryogenetic environment. Examples of this include embryo networks (Alicea and Gordon, 2018) and motion features. The former capability involves extracting potential structural and functional networks using distance metrics and other information extracted from microscopy images. Motion features can also be extracted and can be used for a variety of purposes, including as a means to build generative adversarial network (GAN) models (Goodfellow, 2014). Feature Pyramid Networks (FPNs) enable semantic feature maps (Lin et.al, 2016), which can also be used to approach the identity of anatomical and other biological features in new ways.
 
-Devolearn has been built to be very flexible with respect to exploiting the latest in contemporary deep learning algorithms, but also provides graphical and numerical outpyt that is anemable to novel data science techniques. and to be DevoLearn is highly compatible with libraries such as NumPy (Harris, 2020) and Pandas (Virtanen, 2020) As the Devolearn framework (Figure 4) grows bigger with more tools and deep learning models, the combination of beginner friendliness and support for data science functionality will enable exciting scientific explorations both in developmental biology and data science.   
+Devolearn has been built to be very flexible with respect to exploiting the latest in contemporary deep learning algorithms, but also provides graphical and numerical outpyt that is anemable to novel data science techniques. and to be DevoLearn is highly compatible with libraries such as NumPy (Harris, 2020) and Pandas (Virtanen, 2020) As the Devolearn framework (Figure 5) grows bigger with more tools and deep learning models, the combination of beginner friendliness and support for data science functionality will enable exciting scientific explorations both in developmental biology and data science.   
 
 ## DevoLearn platform
 The DevoLearn PyPI package is a part of the DevoLearn Github organization (https://github.com/devolearn), which serves as a comprehensive open-source research and educational resource. This platform consists of a model library that has more general Machine Learning models for a wider range of model organisms, theory-building activities, and data science tutorials submitted by different contributors. It aims to provide users with Data Science tutorials, web-based applications that offer other Deep Learning and Machine Learning tools for cell segmentation, and other educational resources.  We invite new collaborators to join us on a continual basis in maintaining and expanding the capabilities of the DevoLearn organization.  
   
-![](https://user-images.githubusercontent.com/19001437/101274845-03cf2b80-3767-11eb-9541-bc549f697dbb.png)     
-__Figure 4.__ Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework.  
+![](https://user-images.githubusercontent.com/19001437/144554923-f24ddf9e-4ce8-4927-a8e8-b2035c1a609f.png)     
+__Figure 5.__ Schematic of the DevoLearn Umbrella, which includes the DevoLearn standalone program and the DevoLearn framework.  
   
 ## Future Directions  
 DevoLearn has been developed and improved upon over several model improvements and benchmarking exercises. This has included improvements to the main image segmentation algorithm, which utilizes various deep learning approaches to identify cell boundaries, asymmetries and complex geometries, and the emergence of dividing cells. We plan on building upon these techniques with a focus on defined semantic segmentation techniques and training on a wider variety of datasets to xharacterize this single mode of development in a single species. 
@@ -101,4 +102,4 @@ Murray, J.I., Boyle, T.J., Preston, E., Vafeados, D., Mericle, B., Weisdepp, P.,
 
 Ulman, V. et.al (2017). An objective comparison of cell-tracking algorithms. _Nature Methods_, 14(12), 1141–1152.
 
-Virtanen, P. et.al (2020). SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. _Nature Methods, 17_, 261-272.  
+Virtanen, P. et.al (2020). SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. _Nature Methods, 17_, 261-272.
