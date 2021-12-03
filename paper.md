@@ -30,19 +30,21 @@ __Figure 2.__ Schematic demonstrating the runtime procedure of the DevoLearn sta
 ## Technical Details  
 DevoLearn 0.3.0 is optimized to segment and analyze high-resolution microscopy images such as those acquired using light sheet microscopy. The deep learning models used for embryo segmentation and cell lineage population prediction were both based on the ResNet18 architecture. Data from the EPIC dataset (Murray, 2012) was used to train the GAN (beta) and the lineage wise cell population prediction model. The embryo segmentation model was trained on a dataset sourced from Cao (2019b). Data for the hyperparameter tuning training set was acquired from the Cell Tracking Challenge (http://celltrackingchallenge.net/).
   
-### Segmenting the Cell Nucleus in C. elegans embryo 
+### Segmenting the Cell Nucleus in _C. elegans_ embryo 
 <p align="center">
 <img src = "https://github.com/Mainakdeb/devolearn/blob/master/images/nucleus_segmentation.gif" width = "60%">
 </p>
 
-* Importing the model
+These code examples for importing image data, running the model in DevoLearn, and viewing the results are written in Python. Data can be extracted from video or from standalone microscopy images. Devolearn works best on florescence images or augmented/pre-masked high-resolution microscopy images. The output consists of segmented images with information about the non-normalized _x,y_ position of each identified cell centroid. 
+  
+#### Importing the model
 ```python
 from devolearn import cell_nucleus_segmentor
 segmentor = cell_nucleus_segmentor()
 
 ```
 
-* Running the model on an image and viewing the prediction
+#### Model prediction and viewing the results
 ```python
 seg_pred = segmentor.predict(image_path = "sample_data/images/nucleus_seg_sample.jpg")
 plt.imshow(seg_pred)
