@@ -78,12 +78,12 @@ __Figure 4.__ Training metrics for hyperparameter tuning, from left: IOU scores,
 ### Lineage Prediction
 One advantage of DevoLearn is that _C. elegans_ developmental lineages can be predicting using only a few lines of code. The results of this are demonstrated in Figure 3. We utilize our own lineage population model, which is based on well-established cell identity annotations. This model makes a prediction from an image and saves the predictions in a CSV file. Additionally you can plot the model's predictions to check their integrity.
 
-from devolearn import lineage_population_model
+```from devolearn import lineage_population_model
 model = lineage_population_model(device = "cpu")
 print(model.predict(image_path = "sample_data/images/embryo_sample.png"))
 results = model.predict_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_csv = True, csv_name = "video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10, postprocess = False)
 plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0, postprocess = False)
-plot.show()
+plot.show()```
   
 ### Meta-feature Detection
 DevoLearn is also capable of extracting _meta-features_ that identify movement patterns and multicellular physics in the embryogenetic environment. Examples of this include embryo networks (Alicea and Gordon, 2018) and motion features. The former capability involves extracting potential structural and functional networks using distance metrics and other information extracted from microscopy images. Motion features can also be extracted and can be used for a variety of purposes, including as a means to build generative adversarial network (GAN) models (Goodfellow, 2014). Feature Pyramid Networks (FPNs) enable semantic feature maps (Lin et.al, 2016), which can also be used to approach the identity of anatomical and other biological features in new ways.
