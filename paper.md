@@ -28,11 +28,17 @@ Devolearn (0.3.0) is a Python package that aims to automate the process of colle
 __Figure 2.__ Schematic demonstrating the runtime procedure of the DevoLearn standalone program.
 
 ## Technical Details  
-DevoLearn 0.3.0 is optimized to segment and analyze high-resolution microscopy images such as those acquired using light sheet microscopy. The deep learning models used for embryo segmentation and cell lineage population prediction were both based on the ResNet18 architecture. Data from the EPIC dataset (Murray, 2012) was used to train the GAN (beta) and the lineage wise cell population prediction model. The embryo segmentation model was trained on a dataset sourced from Cao (2019b). Data for the hyperparameter tuning training set was acquired from the Cell Tracking Challenge (http://celltrackingchallenge.net/).
+DevoLearn 0.3.0 is optimized to segment and analyze high-resolution microscopy images such as those acquired using light sheet microscopy. The deep learning models used for embryo segmentation and cell lineage population prediction were both based on the ResNet18 architecture. Data from the EPIC dataset (Murray, 2012) was used to train the GAN (beta) and the lineage wise cell population prediction model. The embryo segmentation model was trained on a dataset sourced from Cao (2019b). Data for the hyperparameter tuning training set was acquired from the Cell Tracking Challenge (http://celltrackingchallenge.net/). All datasets used in developing the pre-trained model are shown in Table 1.
   
 ### Segmenting a _C. elegans_ embryo 
 These code examples for importing image data, running the model in DevoLearn, and viewing the results are written in Python. Data can be extracted from video or from standalone microscopy images. Devolearn works best on florescence images or augmented/pre-masked high-resolution microscopy images. The output consists of segmented cell nuclei (Figure 3) with information about the non-normalized _x,y_ position of each identified cell centroid.
 
+__Table 1.__ Links to Datasets
+| **Model**                                       | **Data source**                                                                                                                                                   |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Segmenting the cell membrane in C. elegans embryo                | [3DMMS: robust 3D Membrane Morphological Segmentation of C. elegans embryo](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/) |
+| Segmenting the nucleus in C. elegans embryo    | [C. elegans Cell-Tracking-Challenge dataset](http://celltrackingchallenge.net/3d-datasets/)                                                           
+| Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)                                
 ![](https://user-images.githubusercontent.com/19001437/144554772-7c60baad-8f34-4e5e-9a87-610386c79a57.gif)   
 __Figure 3.__ An example of nucleus segmentation in DevoLearn.
 
@@ -42,11 +48,10 @@ In some cases, the nucleus is caught in the act of cell division, or is corrupte
 ```python
 from devolearn import cell_nucleus_segmentor
 segmentor = cell_nucleus_segmentor()
-
 ```
 
 ### Generating Synthetic Images Using GANs   
-We also use raw image data as input to a pre-trained Generative Adversarial Network (GAN). To generate such images, you must first import the GAN model, and then generate a picture that can be viewed in Matplotlib. 
+We also use raw image data as input to a pre-trained Generative Adversarial Network (GAN). To generate such images, you must first import the GAN model, and then generate a picture that can be viewed in Matplotlib.   
   
 #### Importing the Model      
 from devolearn import Generator, embryo_generator_model
@@ -64,7 +69,7 @@ You can view the results of the pre-trained model by executing the following cod
 ```python
 seg_pred = segmentor.predict(image_path = "sample_data/images/nucleus_seg_sample.jpg")
 plt.imshow(seg_pred)
-plt.show()
+plt.show()   
 ```
   
 ### Hyperparameter Optimization
@@ -76,14 +81,15 @@ Optuna is a hyperparameter optimization framework capable of automating the proc
 __Figure 4.__ Training metrics for hyperparameter tuning, from left: IOU scores, Validation (val_dice) Loss, and Learning Rate.
 
 ### Lineage Prediction
-One advantage of DevoLearn is that _C. elegans_ developmental lineages can be predicting using only a few lines of code. The results of this are demonstrated in Figure 3. We utilize our own lineage population model, which is based on well-established cell identity annotations. This model makes a prediction from an image and saves the predictions in a CSV file. Additionally you can plot the model's predictions to check their integrity.
+One advantage of DevoLearn is that _C. elegans_ developmental lineages can be predicting using only a few lines of code. Some results of these predictions are demonstrated in Figure 3. We utilize our own lineage population model, which is based on well-established cell identity annotations. This model makes a prediction from an image and saves the predictions in a CSV file. Additionally you can plot the model's predictions to check their integrity.
 
 ```from devolearn import lineage_population_model
 model = lineage_population_model(device = "cpu")
 print(model.predict(image_path = "sample_data/images/embryo_sample.png"))
 results = model.predict_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_csv = True, csv_name = "video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10, postprocess = False)
 plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0, postprocess = False)
-plot.show()```
+plot.show()   
+```
   
 ### Meta-feature Detection
 DevoLearn is also capable of extracting _meta-features_ that identify movement patterns and multicellular physics in the embryogenetic environment. Examples of this include embryo networks (Alicea and Gordon, 2018) and motion features. The former capability involves extracting potential structural and functional networks using distance metrics and other information extracted from microscopy images. Motion features can also be extracted and can be used for a variety of purposes, including as a means to build generative adversarial network (GAN) models (Goodfellow, 2014). Feature Pyramid Networks (FPNs) enable semantic feature maps (Lin et.al, 2016), which can also be used to approach the identity of anatomical and other biological features in new ways.
