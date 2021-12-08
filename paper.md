@@ -33,7 +33,7 @@ DevoLearn 0.3.0 is optimized to segment and analyze high-resolution microscopy i
 ### Segmenting a _C. elegans_ embryo 
 These code examples for importing image data, running the model in DevoLearn, and viewing the results are written in Python. Data can be extracted from video or from standalone microscopy images. Devolearn works best on florescence images or augmented/pre-masked high-resolution microscopy images. The output consists of segmented cell nuclei (Figure 3) with information about the non-normalized _x,y_ position of each identified cell centroid.
 
-![](https://user-images.githubusercontent.com/19001437/144554772-7c60baad-8f34-4e5e-9a87-610386c79a57.gif)
+![](https://user-images.githubusercontent.com/19001437/144554772-7c60baad-8f34-4e5e-9a87-610386c79a57.gif)   
 __Figure 3.__ An example of nucleus segmentation in DevoLearn.
 
 In some cases, the nucleus is caught in the act of cell division, or is corrupted by an ambiguous boundary. This can happen for images taken at various focal planes near the dorsal and ventral surfaces of the embryo. In such cases, the user might adjust the threshold to compensate.
@@ -45,7 +45,22 @@ segmentor = cell_nucleus_segmentor()
 
 ```
 
+### Generating Synthetic Images Using GANs   
+We also use raw image data as input to a pre-trained Generative Adversarial Network (GAN). To generate such images, you must first import the GAN model, and then generate a picture that can be viewed in Matplotlib. 
+  
+#### Importing the Model      
+from devolearn import Generator, embryo_generator_model
+generator = embryo_generator_model()
+  
+#### Generating a picture, view in Matplotlib
+gen_image = generator.generate()  
+plt.imshow(gen_image)
+plt.show()
+generator.generate_n_images(n = 5, foldername= "generated_images", image_size= (700,500))
+
 #### Model prediction and viewing the results
+You can view the results of the pre-trained model by executing the following code. Alternately, you can use the web-based GUI to download model results.  
+  
 ```python
 seg_pred = segmentor.predict(image_path = "sample_data/images/nucleus_seg_sample.jpg")
 plt.imshow(seg_pred)
@@ -60,6 +75,16 @@ Optuna is a hyperparameter optimization framework capable of automating the proc
 ![](https://user-images.githubusercontent.com/19001437/144554864-abd5c1ac-8ab6-4fcf-b4b3-a677ffaee608.png)    
 __Figure 4.__ Training metrics for hyperparameter tuning, from left: IOU scores, Validation (val_dice) Loss, and Learning Rate.
 
+### Lineage Prediction
+One advantage of DevoLearn is that _C. elegans_ developmental lineages can be predicting using only a few lines of code. The results of this are demonstrated in Figure 3. We utilize our own lineage population model, which is based on well-established cell identity annotations. This model makes a prediction from an image and saves the predictions in a CSV file. Additionally you can plot the model's predictions to check their integrity.
+
+from devolearn import lineage_population_model
+model = lineage_population_model(device = "cpu")
+print(model.predict(image_path = "sample_data/images/embryo_sample.png"))
+results = model.predict_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_csv = True, csv_name = "video_preds.csv", ignore_first_n_frames= 10, ignore_last_n_frames= 10, postprocess = False)
+plot = model.create_population_plot_from_video(video_path = "sample_data/videos/embryo_timelapse.mov", save_plot= True, plot_name= "plot.png", ignore_last_n_frames= 0, postprocess = False)
+plot.show()
+  
 ### Meta-feature Detection
 DevoLearn is also capable of extracting _meta-features_ that identify movement patterns and multicellular physics in the embryogenetic environment. Examples of this include embryo networks (Alicea and Gordon, 2018) and motion features. The former capability involves extracting potential structural and functional networks using distance metrics and other information extracted from microscopy images. Motion features can also be extracted and can be used for a variety of purposes, including as a means to build generative adversarial network (GAN) models (Goodfellow, 2014). Feature Pyramid Networks (FPNs) enable semantic feature maps (Lin et.al, 2016), which can also be used to approach the identity of anatomical and other biological features in new ways.
 
