@@ -38,7 +38,7 @@ __Table 1.__ Links to Datasets
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Segmenting the cell membrane in C. elegans embryo                | [3DMMS: robust 3D Membrane Morphological Segmentation of C. elegans embryo](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/) |
 | Segmenting the nucleus in C. elegans embryo    | [C. elegans Cell-Tracking-Challenge dataset](http://celltrackingchallenge.net/3d-datasets/)                                                           
-| Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)                                
+| Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)    |                            
 ![](https://user-images.githubusercontent.com/19001437/144554772-7c60baad-8f34-4e5e-9a87-610386c79a57.gif)   
 __Figure 3.__ An example of nucleus segmentation in DevoLearn.
 
