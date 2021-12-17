@@ -34,15 +34,16 @@ DevoLearn 0.3.0 is optimized to segment and analyze high-resolution microscopy i
 These code examples for importing image data, running the model in DevoLearn, and viewing the results are written in Python. Data can be extracted from video or from standalone microscopy images. Devolearn works best on florescence images or augmented/pre-masked high-resolution microscopy images. The output consists of segmented cell nuclei (Figure 3) with information about the non-normalized _x,y_ position of each identified cell centroid.
 
 __Table 1.__ Links to Datasets
-| **Model**                                       | **Data source**                                                                                                                                                   |
-|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Segmenting the cell membrane in C. elegans embryo                | [3DMMS: robust 3D Membrane Morphological Segmentation of C. elegans embryo](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/) |
-| Segmenting the nucleus in C. elegans embryo    | [C. elegans Cell-Tracking-Challenge dataset](http://celltrackingchallenge.net/3d-datasets/)                                                           
-| Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)    |                            
-![](https://user-images.githubusercontent.com/19001437/144554772-7c60baad-8f34-4e5e-9a87-610386c79a57.gif)   
-__Figure 3.__ An example of nucleus segmentation in DevoLearn.
+| **Model**                                       | **Data source**                |
+|-------------------------------------------------|--------------------------------|
+| Segmenting the cell membrane in _C. elegans_ embryo    | [3DMMS: robust 3D Membrane Morphological Segmentation of _C. elegans_ embryo](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720) |
+| Segmenting the nucleus in _C. elegans_ embryo    | [C. elegans Cell-Tracking-Challenge dataset](http://celltrackingchallenge.net/3d-datasets/)   |       
+| Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)    |  
 
 In some cases, the nucleus is caught in the act of cell division, or is corrupted by an ambiguous boundary. This can happen for images taken at various focal planes near the dorsal and ventral surfaces of the embryo. In such cases, the user might adjust the threshold to compensate.
+  
+![](https://user-images.githubusercontent.com/19001437/144554772-7c60baad-8f34-4e5e-9a87-610386c79a57.gif)   
+__Figure 3.__ An example of nucleus segmentation in DevoLearn.
   
 #### Importing the model
 ```python
