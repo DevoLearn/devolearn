@@ -38,7 +38,7 @@ class cell_nucleus_segmentor(InferenceEngine):
         self.CLASSES = ["nucleus"]
         self.ACTIVATION = 'sigmoid'
         self.in_channels = 1
-        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/cell_membrane_segmentor/cell_nucleus_segmentation_model.pth"
+        self.model_url = "https://github.com/DevoLearn/devolearn/raw/master/devolearn/cell__segmentor/cell_nucleus_segmentation_model.pth"
         self.model_name = "cell_nucleus_segmentation_model.pth"
         self.model_dir = os.path.dirname(__file__)
         # print("at : ", os.path.dirname(__file__))
