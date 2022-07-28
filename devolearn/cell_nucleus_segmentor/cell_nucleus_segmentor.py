@@ -98,6 +98,7 @@ class cell_nucleus_segmentor(InferenceEngine):
 
         im = cv2.imread(image_path,0)
         tensor = self.preprocess(im)
+        self.model.segmentation_head[1].recompute_scale_factor = None
         res = self.model(tensor).detach().cpu().numpy()[0][0]
         res = cv2.resize(res,pred_size)
         return res
