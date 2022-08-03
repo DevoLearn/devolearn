@@ -139,6 +139,9 @@ class cell_membrane_segmentor(InferenceEngine):
 
         tensor = self.preprocess(im)
 
+        # The model has issues with the latest PyTorch versions, which causes
+        # AttributeError: 'Upsample' object has no attribute 'recompute_scale_factor'
+        # To avoid this, we manually set the recompute_scale_factor attribute to None
         self.model.segmentation_head[1].recompute_scale_factor = None
         res = self.model(tensor).detach().cpu().numpy()[0][0]
         
