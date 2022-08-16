@@ -98,6 +98,12 @@ class cell_nucleus_segmentor(InferenceEngine):
 
         im = cv2.imread(image_path,0)
         tensor = self.preprocess(im)
+
+        # The model has issues with the latest PyTorch versions, which causes
+        # AttributeError: 'Upsample' object has no attribute 'recompute_scale_factor'
+        # To avoid this, we manually set the recompute_scale_factor attribute to None
+        self.model.segmentation_head[1].recompute_scale_factor = None
+        
         res = self.model(tensor).detach().cpu().numpy()[0][0]
         res = cv2.resize(res,pred_size)
         return res
