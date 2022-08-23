@@ -24,6 +24,9 @@
 
 ### Installation
 ```python
+pip install devolearn
+
+# or you can build from the source:
 pip install git+https://github.com/DevoLearn/devolearn
 ```
 ### Example notebooks
