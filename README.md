@@ -13,7 +13,7 @@
 
 ## Contents
 
-* [Example notebooks](README.md#example-notebooks)
+* [Example notebooks](https://github.com/DevoLearn/devolearn#example-notebooks)
 * [Segmenting the C. elegans embryo](https://github.com/DevoLearn/devolearn#segmenting-the-c-elegans-embryo)
 * [Generating synthetic images of embryos with a GAN](https://github.com/DevoLearn/devolearn#generating-synthetic-images-of-embryos-with-a-pre-trained-gan)
 * [Predicting populations of cells within the C. elegans embryo](https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo)
