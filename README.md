@@ -156,7 +156,14 @@ plot.show()
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Segmenting the cell membrane in C. elegans embryo                | [3DMMS: robust 3D Membrane Morphological Segmentation of C. elegans embryo](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-019-2720-x#Abs1/) |
 | Segmenting the nucleus in C. elegans embryo    | [C. elegans Cell-Tracking-Challenge dataset](http://celltrackingchallenge.net/3d-datasets/)                                                           
-| Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)                                                                                    
+| Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)   
+
+## Links to HuggingFace
+| **Model**                                       | **Huggingface**                                                                                                                                                   |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Segmenting the cell membrane in C. elegans embryo                | [Cell Membrane segmentor](https://huggingface.co/spaces/devoworm-group/membrane_segmentation) |
+| Segmenting the nucleus in C. elegans embryo    | [C. elegans Nucleus segmentor](https://huggingface.co/spaces/devoworm-group/nucleus_segmentor)                                                           
+| Cell lineage population prediction  | [Lineage population](https://huggingface.co/spaces/devoworm-group/Lineage_Population)    
 
 ## Authors/maintainers:
 * [Mayukh Deb](https://twitter.com/mayukh091)
