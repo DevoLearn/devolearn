@@ -19,6 +19,7 @@
 * [Predicting populations of cells within the C. elegans embryo](https://github.com/DevoLearn/devolearn#predicting-populations-of-cells-within-the-c-elegans-embryo)
 * [Contributing to DevoLearn](https://github.com/DevoLearn/devolearn/blob/master/.github/contributing.md#contributing-to-devolearn)
 * [Links to datasets](https://github.com/DevoLearn/devolearn#links-to-datasets)
+* [Links to Huggingface spaces](https://github.com/DevoLearn/devolearn#links-to-huggingface-spaces)
 * [Contact us](https://github.com/DevoLearn/devolearn#authorsmaintainers)
 
 
@@ -158,7 +159,7 @@ plot.show()
 | Segmenting the nucleus in C. elegans embryo    | [C. elegans Cell-Tracking-Challenge dataset](http://celltrackingchallenge.net/3d-datasets/)                                                           
 | Cell lineage population prediction + embryo GAN | [EPIC dataset](https://epic.gs.washington.edu/)   
 
-## Links to HuggingFace
+## Links to HuggingFace spaces
 | **Model**                                       | **Huggingface**                                                                                                                                                   |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Segmenting the cell membrane in C. elegans embryo                | [Cell Membrane segmentor](https://huggingface.co/spaces/devoworm-group/membrane_segmentation) |
