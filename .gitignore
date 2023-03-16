@@ -1,0 +1,11 @@
+preds/
+generated_images/
+sample_preds/
+__pycache__/
+build/
+devolearn.egg-info/
+dist/
+centroids.csv
+.vscode/
+.venv/
+.DS_Store/
