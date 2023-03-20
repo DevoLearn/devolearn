@@ -8,3 +8,4 @@ dist/
 centroids.csv
 .vscode/
 .venv/
+.DS_Store/
