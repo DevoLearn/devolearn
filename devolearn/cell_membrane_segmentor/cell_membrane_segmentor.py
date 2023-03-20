@@ -125,7 +125,7 @@ class cell_membrane_segmentor(InferenceEngine):
         return tensor
 
     def predict(self, image_path, pred_size = (350,250), centroid_mode = False, color_mode = False):
-        print("fdfdsfds")
+        
         """Loads an image from image_path and converts it to grayscale, 
         then passes it through the model and returns centroids of the segmented features.
         reference{
