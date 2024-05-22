@@ -162,8 +162,6 @@ six==1.16.0
     #   imgaug
     #   munch
     #   python-dateutil
-sklearn==0.0.post1
-    # via -r requirements.in
 threadpoolctl==3.1.0
     # via
     #   -r requirements.in
