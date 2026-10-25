@@ -60,8 +60,8 @@ class lineage_population_model(InferenceEngine):
                                             transforms.Normalize((0.5,), (0.5,))
                                             ])
 
-    def predict(self, image_path):
-        """Loads an image from image_path and converts it to grayscale, 
+    def predict(self, image_path = None, image = None):
+        """Loads an image from image_path or in-memory array/PIL image, 
         then passes it though the model and returns a dictionary 
         with the scaled output (see self.scaler)
 
@@ -70,13 +70,14 @@ class lineage_population_model(InferenceEngine):
         }
 
         Args:
-            image_path (str): path to image.
+            image_path (str, optional): path to image. Defaults to None.
+            image (str, np.ndarray, PIL.Image.Image, optional): path or in-memory image array. Defaults to None.
 
         Returns:
             dict: dictionary containing the cell population values
         """
-        image = cv2.imread(image_path, 0)
-        image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+        gray_image = self.load_image(image if image is not None else image_path, to_grayscale=True)
+        image = cv2.cvtColor(gray_image, cv2.COLOR_GRAY2RGB)
         tensor = self.transforms(image).unsqueeze(0).to(self.device)
         pred = self.model(tensor).detach().cpu().numpy().reshape(1,-1)
 

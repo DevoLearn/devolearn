@@ -53,6 +53,8 @@ segmentor = cell_membrane_segmentor()
 * Running the model on an image and viewing the prediction
 ```python
 seg_pred = segmentor.predict(image_path = "sample_data/images/seg_sample.jpg")
+# Or predict directly on an in-memory numpy array or PIL Image:
+# seg_pred = segmentor.predict(image = numpy_array)
 plt.imshow(seg_pred)
 plt.show()
 ```

@@ -108,6 +108,12 @@ class cell_membrane_segmentor(InferenceEngine):
 
 
     def download_checkpoint(self):
+        if hasattr(smp, "decoders") and hasattr(smp.decoders, "fpn"):
+            import sys
+            if "segmentation_models_pytorch.fpn" not in sys.modules:
+                sys.modules["segmentation_models_pytorch.fpn"] = smp.decoders.fpn
+            if "segmentation_models_pytorch.fpn.model" not in sys.modules:
+                sys.modules["segmentation_models_pytorch.fpn.model"] = smp.decoders.fpn.model
         try:
             # print("model already downloaded, loading model...")
             self.model = torch.load(self.model_dir + "/" + self.model_name, map_location= self.device) 
@@ -124,7 +130,7 @@ class cell_membrane_segmentor(InferenceEngine):
         tensor = self.mini_transform(image_grayscale_numpy).unsqueeze(0).to(self.device)
         return tensor
 
-    def predict(self, image_path, pred_size = (350,250), centroid_mode = False, color_mode = False):
+    def predict(self, image_path = None, pred_size = (350,250), centroid_mode = False, color_mode = False, image = None):
         """Loads an image from image_path and converts it to grayscale, 
         then passes it through the model and returns centroids of the segmented features.
         reference{
@@ -148,7 +154,7 @@ class cell_membrane_segmentor(InferenceEngine):
                     list : list of centroids.
         """
 
-        im = cv2.imread(image_path,0)
+        im = self.load_image(image if image is not None else image_path, to_grayscale=True)
 
         tensor = self.preprocess(im)
 
